@@ -3,12 +3,12 @@ QT -= gui
 
 TARGET = tarot
 CONFIG += console
-CONFIG += c++11
+CONFIG += c++14
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++14
 
 
 SOURCES += main.cpp \
@@ -30,7 +30,16 @@ SOURCES += main.cpp \
     Atout.cpp \
     LePetit.cpp \
     Le21.cpp \
-    Excuse.cpp
+    Excuse.cpp \
+    Equipe.cpp \
+    Chien.cpp \
+    Etat.cpp \
+    Partie.cpp \
+    Distribuer.cpp \
+    Enchere.cpp \
+    Petite.cpp \
+    Niveau.cpp \
+    Garde.cpp
 
 HEADERS += \
     Joueur.h \
@@ -51,5 +60,14 @@ HEADERS += \
     Atout.h \
     LePetit.h \
     Le21.h \
-    Excuse.h
+    Excuse.h \
+    Equipe.h \
+    Chien.h \
+    Etat.h \
+    Partie.h \
+    Distribuer.h \
+    Enchere.h \
+    Petite.h \
+    Niveau.h \
+    Garde.h
 

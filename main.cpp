@@ -10,6 +10,13 @@
 using namespace std;
 
 
+void afficher(Paquet& paquet) {
+    for(auto &carte : paquet.getCartes()) {
+        cerr << carte->afficher() << " , valeur : " << carte->getValeur() <<endl;
+    }
+    cerr << paquet.getCartes().size() <<endl;
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -21,12 +28,8 @@ int main(int argc, char *argv[])
 
     Paquet& paquet = Paquet::getInstance();
     paquet.melanger();
-    for(auto &carte : paquet.getCartes()) {
-        cerr << carte->afficher() << " , valeur : " << carte->getValeur() <<endl;
-    }
-    cerr << paquet.getCartes().size() <<endl;
-
-
+    paquet.couper();
+    afficher(paquet);
 
     return a.exec();
 }

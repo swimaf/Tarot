@@ -1,14 +1,14 @@
-#ifndef EXCLUSE_H
-#define EXCLUSE_H
+#ifndef EXCUSE_H
+#define EXCUSE_H
 
 #include "ACarte.h"
 
 using namespace std;
 
-class Excluse : public ACarte
+class Excuse : public ACarte
 {
     public:
-        Excluse();
+        Excuse();
         double getValeur();
 };
 
