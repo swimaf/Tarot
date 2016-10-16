@@ -2,16 +2,14 @@
 #define ENCHERE_H
 
 #include "Etat.h"
-#include "Niveau.h"
 
 class Enchere : public Etat
 {
     public:
-        Enchere(Partie partie);
+        Enchere(shared_ptr<Partie> partie);
         void demarrer();
+        void recupererCarteSurTable();
 
-    private:
-        Niveau *niveau;
 };
 
 #endif // ENCHERE_H

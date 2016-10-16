@@ -5,14 +5,23 @@
 #include <memory>
 #include <vector>
 #include "ACarte.h"
+#include "Niveau.h"
 
 using namespace std;
 
+class Partie;
 class Joueur
 {
     public:
         Joueur(string n);
         string toString();
+        vector<shared_ptr<ACarte>> getJeux();
+        void ajouterCarte(shared_ptr<ACarte> carte);
+        virtual bool choixEnchere(shared_ptr<Partie> partie, shared_ptr<Niveau> *niveau) = 0;
+        string getNom();
+        void clearCartes();
+        virtual shared_ptr<ACarte> appelerRoi() = 0;
+
 
     protected:
         string name;

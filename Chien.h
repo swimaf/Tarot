@@ -10,10 +10,12 @@ using namespace std;
 class Chien
 {
     public:
-        Chien(int taille);
+        Chien();
         int getTaille();
         vector<shared_ptr<ACarte>> getCartes();
-        void ajouterCarte(auto &carte);
+        void ajouterCarte(shared_ptr<ACarte> carte);
+        void clearCartes();
+
 
     private:
         int taille;

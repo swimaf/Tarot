@@ -1,11 +1,11 @@
 #include "Chien.h"
 
-Chien::Chien(int taille) : taille(taille)
+Chien::Chien()
 {
 
 }
 
-void Chien::ajouterCarte(auto &carte) {
+void Chien::ajouterCarte(shared_ptr<ACarte> carte) {
     cartes.push_back(carte);
 }
 
@@ -15,4 +15,8 @@ int Chien::getTaille(){
 
 vector<shared_ptr<ACarte>> Chien::getCartes() {
     return cartes;
+}
+
+void Chien::clearCartes() {
+    cartes = vector<shared_ptr<ACarte>>();
 }

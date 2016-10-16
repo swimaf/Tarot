@@ -7,11 +7,11 @@
 class Etat
 {
     public:
-        Etat(Partie partie);
+        Etat(shared_ptr<Partie> partie);
         virtual void demarrer() = 0;
 
     protected:
-        Partie partie;
+        shared_ptr<Partie> partie;
 
 };
 

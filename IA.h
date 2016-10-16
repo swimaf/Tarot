@@ -1,16 +1,16 @@
-#ifndef HUMAIN_H
-#define HUMAIN_H
+#ifndef IA_H
+#define IA_H
 
 #include "Joueur.h"
 
-class Humain : public Joueur
+class IA : public Joueur
 {
     public:
-        Humain(string n);
+        IA(string);
         string toString();
         bool choixEnchere(shared_ptr<Partie> partie, shared_ptr<Niveau> *niveau);
         shared_ptr<ACarte> appelerRoi();
 
 };
 
-#endif
+#endif // IA_H

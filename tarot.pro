@@ -37,9 +37,14 @@ SOURCES += main.cpp \
     Partie.cpp \
     Distribuer.cpp \
     Enchere.cpp \
-    Petite.cpp \
     Niveau.cpp \
-    Garde.cpp
+    Garde.cpp \
+    IA.cpp \
+    Constantes.cpp \
+    Prise.cpp \
+    Passer.cpp \
+    AppelRoi.cpp \
+    CreationChien.cpp
 
 HEADERS += \
     Joueur.h \
@@ -67,7 +72,12 @@ HEADERS += \
     Partie.h \
     Distribuer.h \
     Enchere.h \
-    Petite.h \
     Niveau.h \
-    Garde.h
+    Garde.h \
+    IA.h \
+    Constantes.h \
+    Prise.h \
+    Passer.h \
+    AppelRoi.h \
+    CreationChien.h
 

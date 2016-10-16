@@ -7,6 +7,9 @@ class Garde : public Niveau
 {
 public:
     Garde();
+    shared_ptr<Niveau> getSuivant();
+    int getCoefficient();
+    string getNom();
 };
 
 #endif // GARDE_H

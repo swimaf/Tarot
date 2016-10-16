@@ -1,6 +1,6 @@
 #include "Etat.h"
 
-Etat::Etat(Partie partie) : partie(partie)
+Etat::Etat(shared_ptr<Partie> partie) : partie(partie)
 {
 
 }

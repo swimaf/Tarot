@@ -7,7 +7,7 @@
 class Distribuer : public Etat
 {
     public:
-        Distribuer(Partie partie);
+        Distribuer(shared_ptr<Partie> partie);
         void demarrer();
 
 };

@@ -1,4 +1,4 @@
-#ifndef PETITE_H
+ifndef PETITE_H
 #define PETITE_H
 
 #include "Niveau.h"

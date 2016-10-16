@@ -7,16 +7,17 @@
 class Paquet
 {
     public:
-        static Paquet& getInstance();
+        static shared_ptr<Paquet> getInstance();
         vector<shared_ptr<ACarte>> getCartes();
+        void ajouterCartes(shared_ptr<ACarte> carte);
         void melanger();
+        Paquet();
         void couper();
-
+        void clearCartes();
 
     private:
         vector<shared_ptr<ACarte>> cartes;
-        Paquet();
-        static Paquet instance;
+        static shared_ptr<Paquet> instance;
 
 };
 

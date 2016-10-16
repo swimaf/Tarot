@@ -16,7 +16,7 @@
 #include <cstdlib>
 
 
-Paquet Paquet::instance=Paquet();
+shared_ptr<Paquet> Paquet::instance=make_shared<Paquet>();
 
 
 Paquet::Paquet()
@@ -75,7 +75,15 @@ void Paquet::couper() {
     iter_swap(cartes.begin(),cartes.begin()+randomVariable);
 }
 
-Paquet& Paquet::getInstance() {
+shared_ptr<Paquet> Paquet::getInstance() {
     return instance;
+}
+
+void Paquet::clearCartes() {
+    cartes = vector<shared_ptr<ACarte>>();
+}
+
+void Paquet::ajouterCartes(shared_ptr<ACarte> carte) {
+    cartes.push_back(carte);
 }
 
