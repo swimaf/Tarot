@@ -17,3 +17,7 @@ int Garde::getCoefficient() {
 string Garde::getNom() {
     return "Garde";
 }
+
+int Garde::seuil() {
+    return 105;
+}

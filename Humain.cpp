@@ -3,11 +3,7 @@
 #include <iostream>
 #include <Passer.h>
 #include "AForme.h"
-#include "Trefle.h"
-#include "Coeur.h"
-#include "Pique.h"
-#include "Carreau.h"
-#include "ValeurRoi.h"
+#include <algorithm>
 
 
 Humain::Humain(std::string n) : Joueur(n)
@@ -18,7 +14,8 @@ string Humain::toString() {
     return "Je suis un humain et je m'appelle "+Joueur::name;
 }
 
-bool Humain::choixEnchere(shared_ptr<Partie> partie, shared_ptr<Niveau> *niveau) {
+bool Humain::choixEnchere(shared_ptr<Partie> *partie, shared_ptr<Niveau> *niveau) {
+
 
     cerr << "Votre choix : "+name << endl;
     vector<shared_ptr<Niveau>> vNiveau;
@@ -63,12 +60,7 @@ bool Humain::choixEnchere(shared_ptr<Partie> partie, shared_ptr<Niveau> *niveau)
 }
 
 
-shared_ptr<ACarte> Humain::appelerRoi() {
-    vector<shared_ptr<ACarte>> rois;
-    rois.push_back(make_shared<Carreau>("Roi", new ValeurRoi()));
-    rois.push_back(make_shared<Coeur>("Roi", new ValeurRoi()));
-    rois.push_back(make_shared<Pique>("Roi", new ValeurRoi()));
-    rois.push_back(make_shared<Trefle>("Roi", new ValeurRoi()));
+shared_ptr<ACarte> Humain::appelerRoi(vector<shared_ptr<ACarte>> rois) {
 
     cerr << "Choisir votre roi :" << endl;
     int i=0;
@@ -82,5 +74,51 @@ shared_ptr<ACarte> Humain::appelerRoi() {
     cerr << "Vous avez choisie le :" + roiAppele->afficher() << endl;
 
     return roiAppele;
+}
+
+vector<shared_ptr<ACarte>> Humain::selectionCartesChien(int taille) {
+    vector<int> element;
+    unsigned int i=0;
+    cerr << "Choisir les cartes que vous voulez :" << endl;
+    for(shared_ptr<ACarte> carte:jeux) {
+        cerr << "  "<<i << ") "+carte->afficher() << endl;
+        i++;
+    }
+    string stream;
+    unsigned int index;
+    i = 1;
+    while(element.size() != taille) {
+        cerr << i << " cartes :" << endl;
+        cin >> stream;
+        index = stoi(stream);
+        if(index < jeux.size() && find(element.begin(), element.end(), index) == element.end()) {
+            element.push_back(index);
+            i++;
+        } else {
+            cerr << "Cette carte à déjà été choisie :" << endl;
+        }
+    }
+    vector<shared_ptr<ACarte>> cartes;
+    for(int i = 0; i<taille; i++) {
+        cartes.push_back(jeux[element[i]]);
+    }
+    for(int i = 0; i<taille; i++) {
+        jeux.erase(jeux.begin()+ element[i]);
+    }
+    return cartes;
+}
+
+
+shared_ptr<ACarte> Humain::selectionCarteAJouer() {
+
+    int i = 0;
+    for(shared_ptr<ACarte> carte : jeux) {
+        cerr << i << ") "<<carte->afficher() << endl;
+        i++;
+    }
+    string t; /**A MODIFIER**/
+    cin >> t;
+
+    return jeux[stoi(t)];
 }
 

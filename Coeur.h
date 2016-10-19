@@ -10,8 +10,10 @@ class Coeur : public AForme
 {
     public:
         Coeur(string p_name);
-        Coeur(std::string p_name, IValeur *valeur);
-        string afficher();
+        Coeur(std::string p_name, Tete *valeur);
+        string afficher() const;
+        bool operator== (const ACarte* carte) const;
+
 
 };
 

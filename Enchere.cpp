@@ -18,7 +18,7 @@ void Enchere::demarrer() {
 
     /**A REDEFINIR POUR FAIRE UNE BOUCLE TANT QUE PERSONNE A PRIS ET QU'ON EST ARRIVE AU MAX DES PRISES...*/
     for(shared_ptr<Joueur> joueur: partie->getJoueurs()) {
-        if(joueur->choixEnchere(partie, &niveau)) {
+        if(joueur->choixEnchere(&partie, &niveau)) {
             partie->setPreneur(joueur);
             if(niveau->getSuivant() == NULL) {
                 break;
@@ -56,4 +56,5 @@ void Enchere::recupererCarteSurTable() {
         partie->getPaquet()->ajouterCartes(carte);
     }
     partie->getChien()->clearCartes();
+
 }

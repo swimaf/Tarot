@@ -10,6 +10,11 @@ class Excuse : public ACarte
     public:
         Excuse();
         double getValeur();
+        bool isBout();
+        bool isAtout();
+        bool operator== (const ACarte* carte) const;
+
+
 };
 
 #endif // EXCLUSE_H

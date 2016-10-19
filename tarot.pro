@@ -5,6 +5,9 @@ TARGET = tarot
 CONFIG += console
 CONFIG += c++14
 CONFIG -= app_bundle
+LIBS += \
+       -lboost_system\
+
 
 TEMPLATE = app
 
@@ -15,12 +18,6 @@ SOURCES += main.cpp \
     Joueur.cpp \
     Humain.cpp \
     ACarte.cpp \
-    IValeur.cpp \
-    ValeurSimple.cpp \
-    ValeurValet.cpp \
-    ValeurDame.cpp \
-    ValeurCavalier.cpp \
-    ValeurRoi.cpp \
     AForme.cpp \
     Pique.cpp \
     Coeur.cpp \
@@ -44,18 +41,20 @@ SOURCES += main.cpp \
     Prise.cpp \
     Passer.cpp \
     AppelRoi.cpp \
-    CreationChien.cpp
+    CreationChien.cpp \
+    JouerLeJeux.cpp \
+    Cavalier.cpp \
+    Dame.cpp \
+    Roi.cpp \
+    Simple.cpp \
+    Valet.cpp \
+    Tete.cpp \
+    Filtre.cpp
 
 HEADERS += \
     Joueur.h \
     Humain.h \
     ACarte.h \
-    IValeur.h \
-    ValeurSimple.h \
-    ValeurValet.h \
-    ValeurDame.h \
-    ValeurCavalier.h \
-    ValeurRoi.h \
     AForme.h \
     Pique.h \
     Coeur.h \
@@ -79,5 +78,13 @@ HEADERS += \
     Prise.h \
     Passer.h \
     AppelRoi.h \
-    CreationChien.h
+    CreationChien.h \
+    JouerLeJeux.h \
+    Valet.h \
+    Tete.h \
+    Cavalier.h \
+    Simple.h \
+    Dame.h \
+    Roi.h \
+    Filtre.h
 

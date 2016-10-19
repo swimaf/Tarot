@@ -11,6 +11,9 @@ class LePetit: public Atout
     public:
         LePetit();
         double getValeur();
+        bool isBout();
+        bool operator== (const ACarte* carte) const;
+
 };
 
 #endif // LEPETIT_H

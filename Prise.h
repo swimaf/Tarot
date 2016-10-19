@@ -11,6 +11,8 @@ class Prise : public Niveau
         int getCoefficient();
         shared_ptr<Niveau> getSuivant();
         string getNom();
+        int seuil();
+
 };
 
 #endif // PRISE_H

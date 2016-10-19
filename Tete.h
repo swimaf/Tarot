@@ -2,11 +2,12 @@
 #define IVALEUR_H
 
 
-class IValeur
+class Tete
 {
     public:
-        IValeur();
+        Tete();
         virtual double getValeur() = 0;
+        virtual bool isRoi();
 };
 
-#endif // IVALEUR_H
+#endif

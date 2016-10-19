@@ -10,8 +10,10 @@ class Pique : public AForme
 {
     public:
         Pique(string p_name);
-        Pique(string p_name, IValeur *valeur);
-        string afficher();
+        Pique(string p_name, Tete *valeur);
+        string afficher() const;
+        bool operator== (const ACarte* carte) const;
+
 
 };
 

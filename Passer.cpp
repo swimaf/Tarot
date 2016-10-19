@@ -19,3 +19,8 @@ string Passer::getNom() {
     return "Passer";
 }
 
+int Passer::seuil(){
+    return 0;
+}
+
+

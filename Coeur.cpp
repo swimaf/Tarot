@@ -7,11 +7,17 @@ Coeur::Coeur(string p_name) : AForme(p_name)
 
 }
 
-Coeur::Coeur(string p_name, IValeur* valeur) : AForme(p_name, valeur)
+Coeur::Coeur(string p_name, Tete* valeur) : AForme(p_name, valeur)
 {
 
 }
 
-string Coeur::afficher() {
+string Coeur::afficher() const{
     return ACarte::afficher()+" de ♥";
+}
+
+bool Coeur::operator== (const ACarte* carte) const {
+    const Coeur *o = dynamic_cast<const Coeur*>(carte);
+    if(o == NULL) return false;
+    return afficher().compare(o->afficher()) == 0;
 }

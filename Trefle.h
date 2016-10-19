@@ -10,8 +10,10 @@ class Trefle : public AForme
 {
     public:
         Trefle(string name);
-        Trefle(string p_name, IValeur *valeur);
-        string afficher();
+        Trefle(string p_name, Tete *valeur);
+        string afficher() const;
+        bool operator== (const ACarte* carte) const;
+
 
 };
 

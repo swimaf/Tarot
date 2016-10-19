@@ -10,6 +10,8 @@ class Passer : public Niveau
         shared_ptr<Niveau> getSuivant();
         int getCoefficient();
         string getNom();
+        int seuil();
+
 };
 
 #endif // PASSER_H

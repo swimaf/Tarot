@@ -17,10 +17,12 @@ class Joueur
         string toString();
         vector<shared_ptr<ACarte>> getJeux();
         void ajouterCarte(shared_ptr<ACarte> carte);
-        virtual bool choixEnchere(shared_ptr<Partie> partie, shared_ptr<Niveau> *niveau) = 0;
+        virtual bool choixEnchere(shared_ptr<Partie> *partie, shared_ptr<Niveau> *niveau) = 0;
         string getNom();
         void clearCartes();
-        virtual shared_ptr<ACarte> appelerRoi() = 0;
+        virtual shared_ptr<ACarte> appelerRoi(vector<shared_ptr<ACarte>> rois) = 0;
+        virtual vector<shared_ptr<ACarte>> selectionCartesChien(int taille) = 0;
+        virtual shared_ptr<ACarte> selectionCarteAJouer() = 0;
 
 
     protected:

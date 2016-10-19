@@ -17,3 +17,7 @@ int Prise::getCoefficient() {
 string Prise::getNom() {
     return "Prise";
 }
+
+int Prise::seuil(){
+    return 95;
+}

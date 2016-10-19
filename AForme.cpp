@@ -1,20 +1,32 @@
 #include "AForme.h"
-#include "ValeurSimple.h"
+#include "Simple.h"
 
 AForme::AForme(std::string p_name) : ACarte(p_name)
 {
-    iValeur = new ValeurSimple();
+    tete = new Simple();
 }
 
-AForme::AForme(std::string p_name, IValeur *valeur) : ACarte(p_name)
+AForme::AForme(string p_name, Tete *t) : ACarte(p_name)
 {
-    iValeur = valeur;
+    tete = t;
 }
 
 double AForme::getValeur() {
-    return iValeur->getValeur();
+    return tete->getValeur();
 }
 
-std::string AForme::afficher() {
+bool AForme::isRoi() {
+    return tete->isRoi();
+}
+
+string AForme::afficher() const {
     return "Carte simple " + ACarte::afficher();
+}
+
+bool AForme::isBout(){
+    return false;
+}
+
+bool AForme::isAtout(){
+    return false;
 }

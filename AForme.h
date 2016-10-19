@@ -2,20 +2,23 @@
 #define AFORME_H
 
 #include "ACarte.h"
-#include "IValeur.h"
+#include "Tete.h"
 
 class AForme : public ACarte
 {
 
     public:
-        AForme(std::string p_name);
-        AForme(std::string p_name, IValeur* iValeur);
-        void setIValeur(IValeur* iValeur);
-        virtual std::string afficher();
+        AForme(string p_name);
+        AForme(string p_name, Tete* tete);
+        void setTete(Tete* tete);
+        virtual string afficher() const;
         double getValeur();
+        bool isBout();
+        bool isAtout();
+        bool isRoi();
 
     protected:
-        IValeur* iValeur;
+        Tete* tete;
 
 };
 

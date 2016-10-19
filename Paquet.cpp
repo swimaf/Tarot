@@ -3,10 +3,10 @@
 #include "Pique.h"
 #include "Carreau.h"
 #include "Trefle.h"
-#include "ValeurValet.h"
-#include "ValeurCavalier.h"
-#include "ValeurDame.h"
-#include "ValeurRoi.h"
+#include "Valet.h"
+#include "Cavalier.h"
+#include "Dame.h"
+#include "Roi.h"
 #include "Excuse.h"
 #include "Atout.h"
 #include "LePetit.h"
@@ -28,25 +28,25 @@ Paquet::Paquet()
         cartes.push_back(make_shared<Trefle>(to_string(i)));
     }
 
-    cartes.push_back(make_shared<Coeur>("Valet", new ValeurValet()));
-    cartes.push_back(make_shared<Coeur>("Cavalier", new ValeurCavalier()));
-    cartes.push_back(make_shared<Coeur>("Dame", new ValeurDame()));
-    cartes.push_back(make_shared<Coeur>("Roi", new ValeurRoi()));
+    cartes.push_back(make_shared<Coeur>("Valet", new Valet()));
+    cartes.push_back(make_shared<Coeur>("Cavalier", new Cavalier()));
+    cartes.push_back(make_shared<Coeur>("Dame", new Dame()));
+    cartes.push_back(make_shared<Coeur>("Roi", new Roi()));
 
-    cartes.push_back(make_shared<Pique>("Valet", new ValeurValet()));
-    cartes.push_back(make_shared<Pique>("Cavalier", new ValeurCavalier()));
-    cartes.push_back(make_shared<Pique>("Dame", new ValeurDame()));
-    cartes.push_back(make_shared<Pique>("Roi", new ValeurRoi()));
+    cartes.push_back(make_shared<Pique>("Valet", new Valet()));
+    cartes.push_back(make_shared<Pique>("Cavalier", new Cavalier()));
+    cartes.push_back(make_shared<Pique>("Dame", new Dame()));
+    cartes.push_back(make_shared<Pique>("Roi", new Roi()));
 
-    cartes.push_back(make_shared<Carreau>("Valet", new ValeurValet()));
-    cartes.push_back(make_shared<Carreau>("Cavalier", new ValeurCavalier()));
-    cartes.push_back(make_shared<Carreau>("Dame", new ValeurDame()));
-    cartes.push_back(make_shared<Carreau>("Roi", new ValeurRoi()));
+    cartes.push_back(make_shared<Carreau>("Valet", new Valet()));
+    cartes.push_back(make_shared<Carreau>("Cavalier", new Cavalier()));
+    cartes.push_back(make_shared<Carreau>("Dame", new Dame()));
+    cartes.push_back(make_shared<Carreau>("Roi", new Roi()));
 
-    cartes.push_back(make_shared<Trefle>("Valet", new ValeurValet()));
-    cartes.push_back(make_shared<Trefle>("Cavalier", new ValeurCavalier()));
-    cartes.push_back(make_shared<Trefle>("Dame", new ValeurDame()));
-    cartes.push_back(make_shared<Trefle>("Roi", new ValeurRoi()));
+    cartes.push_back(make_shared<Trefle>("Valet", new Valet()));
+    cartes.push_back(make_shared<Trefle>("Cavalier", new Cavalier()));
+    cartes.push_back(make_shared<Trefle>("Dame", new Dame()));
+    cartes.push_back(make_shared<Trefle>("Roi", new Roi()));
 
 
     cartes.push_back(make_shared<Excuse>());

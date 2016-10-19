@@ -9,8 +9,10 @@ class Carreau : public AForme
 {
     public:
         Carreau(string p_name);
-        Carreau(string p_name, IValeur *valeur);
-        string afficher();
+        Carreau(string p_name, Tete *valeur);
+        string afficher() const;
+        bool operator== (const ACarte* carte) const;
+
 
 };
 

@@ -45,17 +45,18 @@ void Distribuer::demarrer() {
         nbCartesPar3++;
     }
 
-    partie->getPaquet()->clearCartes();
 
+    partie->getPaquet()->clearCartes();
     partie->setEtat(make_shared<Enchere>(partie));
 
+
     cerr << "NB joueurs dans partie : "<< partie->getJoueurs().size() <<endl;
-    cerr << "NB carte dans chien : " << partie->getChien()->getCartes().size() << endl;
-    cerr << "NB carte dans paquet : "<< partie->getPaquet()->getCartes().size() <<endl;
+    cerr << "NB carte dans paquet : " << partie->getPaquet()->getCartes().size() <<endl;
 
     for(shared_ptr<Joueur> joueur : partie->getJoueurs()) {
         cerr << "NB carte dans jeux de Joueur : "<< joueur->getJeux().size() <<endl;
     }
+
 
 }
 
