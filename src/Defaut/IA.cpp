@@ -19,8 +19,8 @@ IA::IA(string name): Joueur(name)
 }
 
 
-string IA::toString(){
-    return "Je suis un IA et je m'apelle' " + name;
+QString IA::getType(){
+    return "IA";
 }
 
 bool IA::choixEnchere(shared_ptr<Partie> *partie) {

@@ -49,7 +49,6 @@ void Distribuer::demarrer() {
     int nbCartesPar3 = 0; //
 
     for(i = partie->getChien()->getTaille(); i< Constantes::NB_CARTES; ++i) {
-        cerr << "tes";
         if(nbCartesPar3 > 2) {
             joueurCourant = (joueurCourant == (nbJoueur-1)) ? 0 : ++joueurCourant;
             nbCartesPar3 = 0;
@@ -74,4 +73,8 @@ void Distribuer::demarrer() {
         cerr << "NB carte dans jeux de Joueur : "<< joueur->getJeux().size() <<endl;
     }
     partie->demarrer();
+}
+
+void Distribuer::continuer() {
+    demarrer();
 }

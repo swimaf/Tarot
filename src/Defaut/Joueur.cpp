@@ -9,15 +9,10 @@
 Joueur::Joueur(string n) : name(n), points(0){
 }
 
-string Joueur::toString(){
-    return "Je suis un joueur et je m'apelle' " + name;
-}
 
 QVector<shared_ptr<ACarte>> Joueur::getJeux() {
     return jeux;
 }
-
-
 
 string Joueur::getNom() const {
     return name;
@@ -30,11 +25,22 @@ void Joueur::clearCartes() {
     }
 }
 
-void Joueur::removeCarte(shared_ptr<ACarte> carte) {
+void Joueur::removeSelectable() {
+    QString style;
+    QWidget* button;
+    for(shared_ptr<ACarte> carte:selectable) {
+        button = emplacement->itemAt(jeux.indexOf(carte))->widget();
+        button->setStyleSheet(button->styleSheet().remove("background-color:red;"));
+    }
+}
+
+
+void Joueur::removeCarte(shared_ptr<ACarte> carte, bool removeButton) {
     int index = jeux.indexOf(carte);
-    cerr << index;
+    if(removeButton) {
+        delete emplacement->takeAt(index)->widget();
+    }
     jeux.remove(index);
-    delete emplacement->takeAt(index)->widget();
 }
 
 void Joueur::trierJeux() {}
@@ -114,3 +120,15 @@ void Joueur::resetEmplacement() {
     action->itemAt(0)->widget()->setVisible(true);
     delete action->itemAt(1)->widget();
 }
+
+QVector<shared_ptr<ACarte>> Joueur::getSelectable() {
+    return selectable;
+}
+
+QLabel* Joueur::ajouterLabel() {
+    label = new QLabel(QString::fromStdString(name));
+    label->setAlignment(Qt::AlignHCenter);
+    label->setStyleSheet("color:white");
+    return label;
+}
+

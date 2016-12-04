@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
 
     jeu.exec();
 
-
     return a.exec();
 }
 

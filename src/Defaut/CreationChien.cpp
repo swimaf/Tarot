@@ -9,14 +9,9 @@ CreationChien::CreationChien(shared_ptr<Partie> partie) : Etat(partie)
 }
 
 void CreationChien::demarrer() {
-    cerr << "###################### CREATION DU CHIEN ##############" << endl;
     int tailleChien = partie->getChien()->getCartes().size();
-    //partie->getFenetre()->getHumain()->ajouterCarte(partie->getChien()->getCartes()[0]);
 
-
-    cerr << "\nLE CHIEN :\n";
     for(shared_ptr<ACarte> carte:partie->getChien()->getCartes()) {
-        cerr << carte->afficher() << endl;
         partie->getPreneur()->ajouterCarte(carte);
     }
     partie->getChien()->montrerChien();
@@ -44,15 +39,18 @@ void CreationChien::demarrerHumain(int indexCarte) {
             QString style = button->styleSheet().replace("margin-bottom:50px;", "margin-bottom:0px;");
             button->setStyleSheet(style);
             partie->getChien()->removeCarte(joueur->getJeux()[indexCarte]);
+            partie->getFenetre()->setVisibleValider(false);
         } else {
-            if(partie->getChien()->getCartes().size() != partie->getChien()->getTaille()) {
-                button->setStyleSheet(button->styleSheet()+QString::fromStdString("margin-bottom:50px;"));
-                partie->getChien()->ajouterCarte(joueur->getJeux()[indexCarte]);
-                if(partie->getChien()->getCartes().size() == partie->getChien()->getTaille()) {
-                    partie->getFenetre()->setVisibleValider(true);
+            shared_ptr<ACarte> carte = joueur->getJeux()[indexCarte];
+            if(!(carte->isRoi() || carte->isAtout() || carte->isBout())) {
+                if(partie->getChien()->getCartes().size() != partie->getChien()->getTaille()) {
+                    button->setStyleSheet(button->styleSheet()+QString::fromStdString("margin-bottom:50px;"));
+                    partie->getChien()->ajouterCarte(carte);
+                    if(partie->getChien()->getCartes().size() == partie->getChien()->getTaille()) {
+                        partie->getFenetre()->setVisibleValider(true);
+                    }
                 }
             }
-
         }
     }
 }
@@ -64,19 +62,13 @@ void CreationChien::continuer() {
 void CreationChien::transition() {
     double points = 0;
     for(shared_ptr<ACarte> carte:partie->getChien()->getCartes()) {
-       partie->getPreneur()->removeCarte(carte);
+       partie->getPreneur()->removeCarte(carte, true);
        partie->getPaquet()->ajouterCarte(carte);
        points += carte->getValeur();
     }
 
     partie->getEquipeByJoueur(partie->getPreneur())->ajouterPoints(points);
-
-    cerr << "REMPLACER PAR :" << endl;
-    for(shared_ptr<ACarte> carte:partie->getChien()->getCartes()) {
-        cerr << carte->afficher() << endl;
-    }
     partie->getChien()->clearCartes(true);
-
     partie->setEtat(make_shared<JouerLeJeux>(partie));
     partie->demarrer();
 }

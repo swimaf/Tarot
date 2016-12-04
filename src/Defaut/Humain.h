@@ -7,7 +7,7 @@ class Humain : public Joueur
 {
     public:
         Humain(string n);
-        string toString();
+        QString getType();
         bool choixEnchere(shared_ptr<Partie> *partie);
         shared_ptr<ACarte> appelerRoi(QVector<shared_ptr<ACarte>> rois);
         QVector<shared_ptr<ACarte>> selectionCartesChien(int taille);

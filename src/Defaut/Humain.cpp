@@ -20,10 +20,9 @@ Humain::Humain(std::string n) : Joueur(n)
 {
 }
 
-string Humain::toString() {
-    return "Je suis un humain et je m'appelle "+Joueur::name;
+QString Humain::getType(){
+    return "Humain";
 }
-
 bool Humain::choixEnchere(shared_ptr<Partie> *partie) {
 
     int index = partie->get()->getNiveaux().indexOf(partie->get()->getEnchere());
@@ -75,31 +74,14 @@ void Humain::trierJeux() {
 }
 
 void Humain::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie) {
-
-    /*cerr << "\n**** "<< name << " : Humain *****" << endl;
-
-    cerr << "\nVOS CARTES" << endl;
-    for(shared_ptr<ACarte> carte : jeux) {
-        cerr << carte->afficher() << ", ";
+    selectable = getCartesJouable(pli);
+    QString style;
+    QWidget* c;
+    for(shared_ptr<ACarte> carte : selectable) {
+        c = emplacement->itemAt(jeux.indexOf(carte))->widget();
+        style = c->styleSheet();
+        c->setStyleSheet(style+QString::fromStdString("background-color:red;"));
     }
-
-    cerr << "\n\nVOUS POUVEZ JOUER" << endl;
-
-    QVector<shared_ptr<ACarte>> cartes = getCartesJouable(pli);
-    int i = 0;
-    for(shared_ptr<ACarte> carte : cartes) {
-        cerr << i << ") "<<carte->afficher() << endl;
-        i++;
-    }
-
-    int choix = -1;
-    while(choix < 0 || choix >= i) {
-        cerr << "\nVOTRE CHOIX : " << endl;
-        string t; /**A MODIFIER*
-        cin >> t;
-        choix = stoi(t);
-    }*/
-
 }
 
 void Humain::ajouterCarte(shared_ptr<ACarte> carte) {
@@ -108,7 +90,7 @@ void Humain::ajouterCarte(shared_ptr<ACarte> carte) {
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png');");
+                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png') 0 0 0 0 stretch stretch;");
     emplacement->addWidget(bouton);
     Partie::fenetre->ajouterAction(bouton);
     jeux.push_back(carte);
@@ -118,4 +100,5 @@ void Humain::ajouterCarte(shared_ptr<ACarte> carte) {
 bool Humain::isHumain() {
     return true;
 }
+
 

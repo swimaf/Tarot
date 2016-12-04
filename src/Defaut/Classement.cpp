@@ -3,6 +3,7 @@
 
 Classement::Classement(QVector<shared_ptr<Joueur>> joueurs): joueurs(joueurs)
 {
+    fenetre = make_shared<FenetreClassement>();
 }
 
 void Classement::ajouterPoints(shared_ptr<Joueur> joueurs, int points) {
@@ -16,4 +17,9 @@ QVector<shared_ptr<Joueur>> Classement::getClassement() {
 
 bool Classement::compare(shared_ptr<Joueur> a, shared_ptr<Joueur> b) {
     return a->getPoints() < b->getPoints();
+}
+
+
+void Classement::show() {
+    fenetre->updateAndShow(joueurs);
 }

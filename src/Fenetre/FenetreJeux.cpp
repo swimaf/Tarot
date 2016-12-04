@@ -11,6 +11,7 @@
 #include <QCoreApplication>
 #include "../Defaut/Passer.h"
 #include "../Defaut/Partie.h"
+#include <QLabel>
 
 
 
@@ -36,21 +37,20 @@ FenetreJeux::FenetreJeux(QWidget *parent) : QMainWindow(parent)
 
 
     continuer = new QPushButton("Continuer");
-    continuer->setStyleSheet("max-width: 100px; background:white;");
+    continuer->setStyleSheet("max-width: 100px; border-radius:3px; padding:5px;background:white;");
     valider = new QPushButton("Valider");
-    valider->setStyleSheet("max-width: 100px; background:white;");
+    valider->setStyleSheet("max-width: 100px;  border-radius:3px; padding:5px; background:white;");
     valider->setVisible(false);
     continuer->setVisible(false);
     connect(valider, SIGNAL(clicked()),this, SLOT(onValider()));
     connect(continuer, SIGNAL(clicked()),this, SLOT(onContinuer()));
 
-    initEmplacement(1,0);
-    initEmplacement(0,1);
-    initEmplacement(1,2);
-    initEmplacement(2,1);
+    initEmplacement(2,0);
+    initEmplacement(0,2);
+    initEmplacement(2,4);
+    initEmplacement(4,2);
 
-
-    centre->addLayout(milieu,1,1,1,1);
+    centre->addLayout(milieu,2,2,1,1);
     milieu->addLayout(enchere);
     milieu->addLayout(chien.get());
 
@@ -76,7 +76,6 @@ void FenetreJeux::ajouterAction(QPushButton *button) {
 }
 
 void FenetreJeux::pushButtonClicked() {
-    std::cerr << "Salut";
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     int indexCarte = joueur->getEmplacement()->indexOf(button);
     partie->demarrerHumain(indexCarte);
@@ -95,11 +94,9 @@ void FenetreJeux::onContinuer() {
 void FenetreJeux::initEmplacement(int x, int y) {
     shared_ptr<QHBoxLayout> layout = make_shared<QHBoxLayout>();
     emplacements.push_back(layout);
-    //s->setStyleSheet("height:100%;border:0; outline:none");
     QPushButton *r = new QPushButton();
     r->setStyleSheet("max-height: 100%; max-width: 70%; border-radius : 5px; border:2px solid #005E10;");
     layout->addWidget(r);
-
     centre->addLayout(layout.get(),x,y,1,1);
 
 }
@@ -111,7 +108,6 @@ void FenetreJeux::onValider() {
 
 
 void FenetreJeux::associerEmplacement(shared_ptr<Joueur> joueur, int indexJoueur, int taille) {
-    cerr << emplacements.size();
     if(taille == 5) {
         joueur->setEmplacement(placement.at(indexJoueur));
         joueur->setBoutons(emplacements.at(indexJoueur));
@@ -119,16 +115,27 @@ void FenetreJeux::associerEmplacement(shared_ptr<Joueur> joueur, int indexJoueur
         if(indexJoueur == 0) {
             joueur->setEmplacement(placement.at(0));
             joueur->setBoutons(emplacements.at(0));
+            centre->addWidget(joueur->ajouterLabel(),3,0,1,1);
         } else {
             joueur->setEmplacement(placement.at(placement.size()+indexJoueur-taille));
             joueur->setBoutons(emplacements.at(placement.size()+indexJoueur-taille));
         }
     }
+    if(taille-1 == indexJoueur) {
+        QLabel* label = joueur->ajouterLabel();
+        label->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+        centre->addWidget(label,3,2,1,1);
+    } else if(taille-2 == indexJoueur) {
+        centre->addWidget(joueur->ajouterLabel(),3,4,1,1);
+    } else if(taille == 4 && indexJoueur == 1) {
+        centre->addWidget(joueur->ajouterLabel(),1,2,1,1);
+    }
+
+
 }
 
 void FenetreJeux::checkEnchere(int index, bool visible) {
     enchere->itemAt(0)->widget()->setVisible(visible);
-
     for (int i = index+1; i < enchere->count(); ++i) {
         QWidget *w = enchere->itemAt(i)->widget();
         if(w != NULL) {
@@ -147,10 +154,10 @@ void FenetreJeux::createEnchere(shared_ptr<Joueur> j) {
     while(niveau != NULL) {
         QPushButton *bouton = new QPushButton(QString::fromStdString(niveau->getNom()));
         bouton->setVisible(false);
+        bouton->setStyleSheet("max-width: 100px; border-radius:3px; padding:5px; background:white;");
         enchere->addWidget(bouton);
         niveau = niveau->getSuivant();
         connect(bouton, SIGNAL(clicked()), this, SLOT(enchereClicked()));
-
     }
 }
 

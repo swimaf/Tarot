@@ -32,7 +32,6 @@ void Jeu::lancer() {
 }
 
 
-
 QVector<shared_ptr<Joueur>> Jeu::creerJoueur() {
     QVector<shared_ptr<Joueur>> joueurs;
     joueurs.push_back(make_shared<IA>("Etienne"));

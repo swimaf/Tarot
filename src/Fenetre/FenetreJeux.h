@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include "Sleeper.h"
 #include <memory>
+#include <QLabel>
 #include "../Defaut/Joueur.h"
 
 class FenetreJeux : public QMainWindow

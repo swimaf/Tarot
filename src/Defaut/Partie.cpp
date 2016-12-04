@@ -5,6 +5,7 @@
 #include "Passer.h"
 #include "../Fenetre/FenetreJeux.h"
 #include "../Defaut/Constantes.h"
+#include "../Fenetre/FenetreClassement.h"
 
 shared_ptr<FenetreJeux> Partie::fenetre;
 
@@ -25,8 +26,11 @@ Partie::Partie(shared_ptr<Paquet> paquet, QVector<shared_ptr<Joueur>> joueurs) :
     for(int i=0; i<taille; i++) {
         jeux->associerEmplacement(joueurs[i], i, taille);
     }
+
+
     jeux->createEnchere(joueurs.last());
     jeux->show();
+
 
 }
 
@@ -119,7 +123,6 @@ void Partie::compterPoint() {
 
         if(equipe->getJoueurs().indexOf(preneur) >= 0) {
             points = equipe->getPoints();
-            cerr << "POINTS : "<< points << endl;
             if(equipe->getNbBouts() == 3) {
                 points -= 36;
             }else if(equipe->getNbBouts() == 2) {
@@ -132,9 +135,7 @@ void Partie::compterPoint() {
             if(points > 0) {
                 points += 25;
             }
-            cerr << "POINTS : "<< points << endl;
             points = enchere->multiplicateur() * points;
-            cerr << "POINTS : "<< points << endl;
 
             int nbAdversaire = 0;
             /**On enleve les points au perdants**/
@@ -143,12 +144,12 @@ void Partie::compterPoint() {
                     for(shared_ptr<Joueur> joueur:e->getJoueurs()) {
                         joueur->ajouterPoints(-(points));
                     }
-                    nbAdversaire = joueurs.size();
+                    nbAdversaire += joueurs.size();
                 }
             }
             for(shared_ptr<Joueur> joueur:equipe->getJoueurs()) {
                 if(joueur == preneur) {
-                    joueur->ajouterPoints(points*(nbAdversaire - equipe->getJoueurs().size() - 1));
+                    joueur->ajouterPoints(points*(nbAdversaire - equipe->getJoueurs().size() + 1));
                 } else {
                     joueur->ajouterPoints(points);
                 }

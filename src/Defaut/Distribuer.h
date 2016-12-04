@@ -9,6 +9,7 @@ class Distribuer : public Etat
     public:
         Distribuer(shared_ptr<Partie> partie);
         void demarrer();
+        void continuer();
 
     private:
 };
