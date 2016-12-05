@@ -22,7 +22,7 @@ static const uint qt_meta_data_FenetreJeux[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,13 +32,17 @@ static const uint qt_meta_data_FenetreJeux[] = {
  // slots: signature, parameters, type, tag, flags
       13,   12,   12,   12, 0x0a,
       33,   12,   12,   12, 0x0a,
+      50,   12,   12,   12, 0x0a,
+      62,   12,   12,   12, 0x0a,
+      76,   12,   12,   12, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_FenetreJeux[] = {
     "FenetreJeux\0\0pushButtonClicked()\0"
-    "enchereClicked()\0"
+    "enchereClicked()\0onValider()\0onContinuer()\0"
+    "onClickRoi()\0"
 };
 
 void FenetreJeux::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -49,6 +53,9 @@ void FenetreJeux::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->pushButtonClicked(); break;
         case 1: _t->enchereClicked(); break;
+        case 2: _t->onValider(); break;
+        case 3: _t->onContinuer(); break;
+        case 4: _t->onClickRoi(); break;
         default: ;
         }
     }
@@ -87,9 +94,9 @@ int FenetreJeux::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     }
     return _id;
 }
