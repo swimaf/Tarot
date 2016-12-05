@@ -22,16 +22,7 @@ Partie::Partie(shared_ptr<Paquet> paquet, QVector<shared_ptr<Joueur>> joueurs) :
         niveaux.push_back(niveau);
         niveau = niveau->getSuivant();
     }
-    int taille = joueurs.size();
-    for(int i=0; i<taille; i++) {
-        jeux->associerEmplacement(joueurs[i], i, taille);
-    }
-
-
-    jeux->createEnchere(joueurs.last());
     jeux->show();
-
-
 }
 
 shared_ptr<Chien> Partie::getChien() {
@@ -147,15 +138,21 @@ void Partie::compterPoint() {
                     nbAdversaire += joueurs.size();
                 }
             }
+            nbAdversaire -= nbAdversaire == 5 ? equipe->getJoueurs().size()-1 : equipe->getJoueurs().size();
+            string affichage = "";
             for(shared_ptr<Joueur> joueur:equipe->getJoueurs()) {
                 if(joueur == preneur) {
-                    joueur->ajouterPoints(points*(nbAdversaire - equipe->getJoueurs().size() + 1));
+                    joueur->ajouterPoints(points*nbAdversaire);
+                    affichage += joueur->getNom();
                 } else {
                     joueur->ajouterPoints(points);
+                    affichage += " et son coequipier "+joueur->getNom() + " ont ";
                 }
             }
+            affichage += points > 0 ? " gagné de " : " chuté de ";
+            affichage.append(to_string(points)+ " points");
+            fenetre->setText(affichage);
             break;
-
         }
     }
 }

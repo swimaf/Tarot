@@ -5,17 +5,21 @@
 
 CreationChien::CreationChien(shared_ptr<Partie> partie) : Etat(partie)
 {
-
+    isCreer = false;
 }
 
 void CreationChien::demarrer() {
+    isCreer = true;
+    partie->getFenetre()->setText("Le chien:");
     int tailleChien = partie->getChien()->getCartes().size();
 
     for(shared_ptr<ACarte> carte:partie->getChien()->getCartes()) {
         partie->getPreneur()->ajouterCarte(carte);
     }
     partie->getChien()->montrerChien();
+    cerr << "TEST1";
     partie->getChien()->clearCartes(false);
+    cerr << "TEST2";
 
     for(shared_ptr<Joueur> joueur:partie->getJoueurs()){
         joueur->trierJeux();
@@ -56,10 +60,15 @@ void CreationChien::demarrerHumain(int indexCarte) {
 }
 
 void CreationChien::continuer() {
-    transition();
+    if(isCreer) {
+        transition();
+    } else {
+        demarrer();
+    }
 }
 
 void CreationChien::transition() {
+    isCreer = false;
     double points = 0;
     for(shared_ptr<ACarte> carte:partie->getChien()->getCartes()) {
        partie->getPreneur()->removeCarte(carte, true);

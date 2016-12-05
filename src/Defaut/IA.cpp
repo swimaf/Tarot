@@ -36,7 +36,6 @@ bool IA::choixEnchere(shared_ptr<Partie> *partie) {
 
     bool choix= false;
 
-    cerr << index <<endl;
     for(int i=partie->get()->getNiveaux().size() - 1; i> index ; i--) {
        if(coeff > partie->get()->getNiveaux()[i]->seuil()) {
            partie->get()->setEnchere(partie->get()->getNiveaux()[i]);
@@ -44,7 +43,6 @@ bool IA::choixEnchere(shared_ptr<Partie> *partie) {
        }
     }
 
-    //cerr << "Nb joueur" << nbJoueurs <<"Atout : " << nbAtout << " Bout : " << nbBout << " Val : " << nbValeurs << endl;
     return choix;
 }
 
@@ -111,8 +109,6 @@ QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille) {
 
 
 void IA::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie) {
-
-    cerr << "\n**** " << name << " : Intelligence artificielle *****" << endl;
 
     if(pli->getCartes().isEmpty()) {
         QVector<QVector<shared_ptr<ACarte>>> formes;

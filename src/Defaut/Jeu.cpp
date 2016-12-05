@@ -13,21 +13,10 @@ Jeu::Jeu()
 
     partie = make_shared<Partie>(paquet, joueurs);
     partie->setEtat(make_shared<Distribuer>(partie->shared_from_this()));
-    partie->getFenetre()->setPartie(partie->shared_from_this());
+    partie->getFenetre()->initialisation(partie->shared_from_this());
 }
 
 void Jeu::exec() {
-    timer = new QTimer(this);
-    //connect(timer, SIGNAL(timeout()), this, SLOT(lancer()));
-    //timer->start(500);
-
-    //A SUPPRIMER
-    //partie->demarrer();
-   partie->demarrer();
-
-}
-
-void Jeu::lancer() {
     partie->demarrer();
 }
 
@@ -37,6 +26,7 @@ QVector<shared_ptr<Joueur>> Jeu::creerJoueur() {
     joueurs.push_back(make_shared<IA>("Etienne"));
     joueurs.push_back(make_shared<IA>("Lea"));
     joueurs.push_back(make_shared<IA>("Francoise"));
+    //joueurs.push_back(make_shared<IA>("Simon"));
     joueurs.push_back(make_shared<Humain>("Pierre"));
 
     return joueurs;

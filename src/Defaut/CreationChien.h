@@ -12,6 +12,9 @@ class CreationChien : public Etat
         void demarrerHumain(int indexCarte);
         void continuer();
 
+    private:
+        bool isCreer;
+
 };
 
 #endif // CREATIONCHIEN_H

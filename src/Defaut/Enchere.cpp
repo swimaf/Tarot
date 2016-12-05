@@ -11,10 +11,9 @@ Enchere::Enchere(shared_ptr<Partie> partie) : Etat(partie)
 
 
 void Enchere::demarrer() {
-    cerr << "\n############# ENCHERE DU JEUX ###########\n" <<endl;
+    partie->getFenetre()->setText("Vous pouvez encherir : ");
     partie->setEnchere(partie->getNiveaux()[0]);
     for(shared_ptr<Joueur> joueur: partie->getJoueurs()) {
-        cerr << "### " << joueur->getNom() << " #### :" ;
         if(joueur->isHumain()) {
             joueur->choixEnchere(&partie);
             break;
@@ -26,7 +25,7 @@ void Enchere::demarrer() {
                 break;
             }
         }
-        cerr << partie->getEnchere()->getNom() << endl;
+        joueur->setText("Choix : " + partie->getEnchere()->getNom());
     }
 }
 
@@ -38,35 +37,37 @@ void Enchere::choixEnchere(int i) {
     partie->getFenetre()->checkEnchere(0, false);
 
     for(int i = partie->getJoueurs().indexOf(partie->getFenetre()->getHumain())+1; i<partie->getJoueurs().size(); i++) {
-        cerr << "### " << partie->getJoueurs()[i]->getNom() << " #### :" ;
         if(partie->getJoueurs()[i]->choixEnchere(&partie)) {
             partie->setPreneur(partie->getJoueurs()[i]);
             if(partie->getEnchere()->getSuivant() == NULL) {
                 break;
             }
         }
-        cerr << partie->getEnchere()->getNom() << endl;
+        partie->getJoueurs()[i]->setText("Choix : " + partie->getEnchere()->getNom());
     }
     transition();
 
 }
 
 void Enchere::transition() {
+    for(shared_ptr<Joueur> joueur:partie->getJoueurs()) {
+        joueur->setText("");
+    }
     if(partie->getPreneur() == NULL) {
-        cerr << "Il y a pas de preneur le jeux va être redistribué" << endl;
+        partie->getFenetre()->setText("Il y a pas de preneur le jeux va être redistribué");
         recupererCarteSurTable();
         partie->setEtat(make_shared<Distribuer>(partie));
 
     } else {
         creerEquipes();
-        cerr << partie->getPreneur()->getNom() << " fait une " << partie->getEnchere()->getNom() << endl;
+        partie->getFenetre()->setText(partie->getPreneur()->getNom()+ " fait une " +partie->getEnchere()->getNom());
         if(partie->getJoueurs().size() == 5) {
             partie->setEtat(make_shared<AppelRoi>(partie));
         } else {
             partie->setEtat(make_shared<CreationChien>(partie));
         }
     }
-    partie->demarrer();
+    partie->getFenetre()->setVisibleContinuer(true);
 }
 
 void Enchere::recupererCarteSurTable() {

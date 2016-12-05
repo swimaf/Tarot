@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     Jeu jeu;
-
     jeu.exec();
 
     return a.exec();

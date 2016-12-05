@@ -23,12 +23,7 @@ FenetreJeux::FenetreJeux(QWidget *parent) : QMainWindow(parent)
     j = 0;
     QWidget* window = new QWidget();
 
-    QGridLayout *gridLayout = new QGridLayout();
-
-    placement.push_back(make_shared<QVBoxLayout>());
-    placement.push_back(make_shared<QHBoxLayout>());
-    placement.push_back(make_shared<QVBoxLayout>());
-    placement.push_back(make_shared<QHBoxLayout>());
+    gridLayout = new QGridLayout();
 
     enchere = new QHBoxLayout();
     milieu = new QHBoxLayout();
@@ -45,20 +40,15 @@ FenetreJeux::FenetreJeux(QWidget *parent) : QMainWindow(parent)
     connect(valider, SIGNAL(clicked()),this, SLOT(onValider()));
     connect(continuer, SIGNAL(clicked()),this, SLOT(onContinuer()));
 
-    initEmplacement(2,0);
-    initEmplacement(0,2);
-    initEmplacement(2,4);
-    initEmplacement(4,2);
+    label = new QLabel();
 
     centre->addLayout(milieu,2,2,1,1);
+    milieu->setAlignment(Qt::AlignCenter);
+    milieu->addWidget(label);
     milieu->addLayout(enchere);
     milieu->addLayout(chien.get());
 
     gridLayout->addLayout(centre, 1,1, 3 , 3);
-    gridLayout->addLayout(placement.at(0).get(), 1,0, 4 , 1);
-    gridLayout->addLayout(placement.at(1).get(), 0,0, 1 , 5);
-    gridLayout->addLayout(placement.at(2).get(), 1,4, 4 , 1);
-    gridLayout->addLayout(placement.at(3).get(), 4,1, 1 , 3);
 
     window->setLayout(gridLayout);
     setFixedWidth(1000);
@@ -71,8 +61,53 @@ FenetreJeux::FenetreJeux(QWidget *parent) : QMainWindow(parent)
 
 }
 
+void FenetreJeux::initialisation(shared_ptr<Partie> part) {
+    partie = part;
+    partie->getChien()->setLayout(chien);
+    int taille = partie->getJoueurs().size();
+
+
+    placement.push_back(make_shared<QVBoxLayout>());
+    gridLayout->addLayout(placement.at(0).get(), 1,0, 4 , 1);
+    initEmplacement(2,0);
+
+    if(taille == 4) {
+        placement.push_back(make_shared<QHBoxLayout>());
+        gridLayout->addLayout(placement.at(1).get(), 0,0, 1 , 5);
+        initEmplacement(0,2);
+
+    } else if(taille == 5) {
+        placement.push_back(make_shared<QHBoxLayout>());
+        placement.push_back(make_shared<QHBoxLayout>());
+        gridLayout->addLayout(placement.at(1).get(), 0,0, 1 , 2);
+        gridLayout->addLayout(placement.at(2).get(), 0,3, 1 , 2);
+        initEmplacement(0,1);
+        initEmplacement(0,3);
+
+    }
+
+    placement.push_back(make_shared<QVBoxLayout>());
+    placement.push_back(make_shared<QHBoxLayout>());
+    gridLayout->addLayout(placement.at(placement.size()-2).get(), 1,4, 4 , 1);
+    gridLayout->addLayout(placement.at(placement.size()-1).get(), 4,1, 1 , 3);
+
+    initEmplacement(2,4);
+    initEmplacement(4,2);
+
+    for(int i=0; i<taille; i++) {
+        associerEmplacement(partie->getJoueurs()[i], i, taille);
+    }
+    createEnchere(partie->getJoueurs().last());
+
+}
+
+
 void FenetreJeux::ajouterAction(QPushButton *button) {
     connect(button, SIGNAL(clicked()),this, SLOT(pushButtonClicked()));
+}
+
+void FenetreJeux::ajouterActionRoi(QPushButton *button) {
+    connect(button, SIGNAL(clicked()),this, SLOT(onClickRoi()));
 }
 
 void FenetreJeux::pushButtonClicked() {
@@ -81,15 +116,26 @@ void FenetreJeux::pushButtonClicked() {
     partie->demarrerHumain(indexCarte);
 }
 
-void FenetreJeux::setPartie(shared_ptr<Partie> part) {
-    partie = part;
-    partie->getChien()->setLayout(chien);
-}
-
 void FenetreJeux::onContinuer() {
     continuer->setVisible(false);
     partie->continuer();
 }
+
+void FenetreJeux::onClickRoi() {
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    int indexCarte = joueur->getBoutons()->indexOf(button);
+    partie->demarrerHumain(indexCarte-3);
+}
+
+void FenetreJeux::eraseRois() {
+
+    delete joueur->getBoutons()->itemAt(3)->widget();
+    delete joueur->getBoutons()->itemAt(3)->widget();
+    delete joueur->getBoutons()->itemAt(3)->widget();
+    delete joueur->getBoutons()->itemAt(3)->widget();
+
+}
+
 
 void FenetreJeux::initEmplacement(int x, int y) {
     shared_ptr<QHBoxLayout> layout = make_shared<QHBoxLayout>();
@@ -108,20 +154,23 @@ void FenetreJeux::onValider() {
 
 
 void FenetreJeux::associerEmplacement(shared_ptr<Joueur> joueur, int indexJoueur, int taille) {
+    shared_ptr<QBoxLayout> layout;
+    shared_ptr<QHBoxLayout> boutons;
     if(taille == 5) {
-        joueur->setEmplacement(placement.at(indexJoueur));
-        joueur->setBoutons(emplacements.at(indexJoueur));
+        layout = placement.at(indexJoueur);
+        boutons = emplacements.at(indexJoueur);
     } else {
         if(indexJoueur == 0) {
-            joueur->setEmplacement(placement.at(0));
-            joueur->setBoutons(emplacements.at(0));
-            centre->addWidget(joueur->ajouterLabel(),3,0,1,1);
+            layout = placement.at(indexJoueur);
+            boutons = emplacements.at(0);
         } else {
-            joueur->setEmplacement(placement.at(placement.size()+indexJoueur-taille));
-            joueur->setBoutons(emplacements.at(placement.size()+indexJoueur-taille));
+            layout = placement.at(placement.size()+indexJoueur-taille);
+            boutons = emplacements.at(placement.size()+indexJoueur-taille);
         }
     }
-    if(taille-1 == indexJoueur) {
+    if(indexJoueur == 0) {
+        centre->addWidget(joueur->ajouterLabel(),3,0,1,1);
+    } else if(taille-1 == indexJoueur) {
         QLabel* label = joueur->ajouterLabel();
         label->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         centre->addWidget(label,3,2,1,1);
@@ -129,7 +178,15 @@ void FenetreJeux::associerEmplacement(shared_ptr<Joueur> joueur, int indexJoueur
         centre->addWidget(joueur->ajouterLabel(),3,4,1,1);
     } else if(taille == 4 && indexJoueur == 1) {
         centre->addWidget(joueur->ajouterLabel(),1,2,1,1);
+    } else if(taille == 5 && indexJoueur == 1){
+        centre->addWidget(joueur->ajouterLabel(),1,1,1,1);
+    } else if(taille == 5 && indexJoueur == 2) {
+        centre->addWidget(joueur->ajouterLabel(),1,3,1,1);
     }
+
+    joueur->setEmplacement(layout);
+    joueur->setBoutons(boutons);
+
 
 
 }
@@ -169,6 +226,20 @@ void FenetreJeux::enchereClicked() {
 
 }
 
+void FenetreJeux::showRoi(shared_ptr<ACarte> roi) {
+    QPushButton *bouton = new QPushButton("");
+    bouton->setStyleSheet("height:100%;"
+                          "width:100%;"
+                          "max-height: 100%;"
+                          "max-width: 70%;"
+                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png') 0 0 0 0 stretch stretch;");
+    milieu->addWidget(bouton);
+}
+
+void FenetreJeux::eraseRoi() {
+    delete milieu->itemAt(milieu->count()-1)->widget();
+}
+
 shared_ptr<Joueur> FenetreJeux::getHumain() {
     return joueur;
 }
@@ -178,4 +249,8 @@ void FenetreJeux::setVisibleContinuer(bool b) {
 }
 void FenetreJeux::setVisibleValider(bool b) {
     valider->setVisible(b);
+}
+
+void FenetreJeux::setText(string text) {
+    label->setText(QString::fromStdString(text));
 }

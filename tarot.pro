@@ -14,7 +14,6 @@ QMAKE_CXXFLAGS += -std=c++14
 
 SOURCES += src/main.cpp \
     src/Carte/ACarte.cpp \
-    src/Fenetre/Sleeper.cpp \
     src/Carte/AForme.cpp \
     src/Carte/Atout.cpp \
     src/Carte/Carreau.cpp \

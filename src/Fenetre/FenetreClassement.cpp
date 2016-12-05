@@ -32,7 +32,6 @@ FenetreClassement::FenetreClassement(QWidget *parent) : QMainWindow(parent)
     tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-    //tableWidget->setSortingEnabled(true);
 
     layout->addWidget(tableWidget);
     layout->addWidget(continuer);
@@ -59,7 +58,6 @@ void FenetreClassement::updateAndShow(QVector<shared_ptr<Joueur>> joueurs) {
 
 void FenetreClassement::onQuitter(){
     exit(0);
-
 }
 
 void FenetreClassement::onContinuer() {

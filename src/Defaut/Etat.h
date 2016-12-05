@@ -9,13 +9,10 @@ class Etat
     public:
         Etat(shared_ptr<Partie> partie);
         virtual void demarrer() = 0;
-        virtual void demarrerHumain(int indexCarte) {}
+        virtual void demarrerHumain(int indexCarte);
         virtual void transition() {}
         virtual void continuer() {}
-        virtual void choixEnchere(int indexCarte) {}
-
-
-
+        virtual void choixEnchere(int indexCarte);
 
     protected:
         shared_ptr<Partie> partie;

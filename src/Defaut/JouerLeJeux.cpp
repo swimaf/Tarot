@@ -15,10 +15,10 @@ JouerLeJeux::JouerLeJeux(shared_ptr<Partie> partie) : Etat(partie)
 
 
 void JouerLeJeux::demarrer() {
+    partie->getFenetre()->setText();
     shared_ptr<Joueur> joueur = partie->getJoueurs()[joueurCourant];
     joueur->selectionCarteAJouer(&pli, &partie);
     if(!joueur->isHumain()) {
-        //Sleeper::sleep(1);
         nextJoueur();
     }
 }
@@ -42,26 +42,22 @@ void JouerLeJeux::nextJoueur() {
     shared_ptr<Joueur> joueur = partie->getJoueurs()[joueurCourant];
 
     if(nbJoueurs == 5 && partie->getCarteSelectionne()->operator ==(partie->getRoiAppele().get())) {
-        cerr << "REUNIFICATION EQUIPE" <<endl;
         partie->reunirEquipe(joueur);
     }
     pli.ajouterCarte(partie->getJoueurs().indexOf(joueur), partie->getCarteSelectionne());
     joueur->removeCarte(partie->getCarteSelectionne(), false);
 
-    cerr << "Carte joué : " << partie->getCarteSelectionne()->afficher() << endl;
     joueurCourant++;
-
 
     if(joueurCourant == partie->getJoueurs().size()) {
         shared_ptr<ACarte> excuse = NULL;
         int vainqueur = pli.indexOfVainqueur();
-        cerr << "Vainqueur : "  << partie->getJoueurs()[vainqueur]->getNom() << endl;
+        partie->getFenetre()->setText("Vainqueur de la manche : " + partie->getJoueurs()[vainqueur]->getNom());
         shared_ptr<Equipe> equipe = partie->getEquipeByJoueur(partie->getJoueurs()[vainqueur]);
         equipe->ajouterBout(nbDeBout(pli, &excuse));
         equipe->ajouterPoints(pli.getPoints());
 
         if(!(excuse == NULL)) {
-            cerr << "TEST EXCUSE" << endl;
             shared_ptr<Equipe> equipeExcuse = partie->getEquipeByJoueur(partie->getJoueurs()[pli.getJoueurByCarte(excuse)]);
             if(equipeExcuse->getJoueurs().indexOf(partie->getJoueurs()[vainqueur]) < 0 ) {
                 equipeExcuse->ajouterBout(1);
@@ -75,10 +71,6 @@ void JouerLeJeux::nextJoueur() {
         partie->couperJoueur(vainqueur);
         joueurCourant = 0;
         partie->getPaquet()->ajouterCartes(pli.getCartes());
-
-        for(shared_ptr<Equipe> equipe: partie->getEquipes()) {
-            cerr << equipe->getPoints() <<  endl;
-        }
         tour--;
 
         if(tour == 0) {
@@ -106,13 +98,7 @@ void JouerLeJeux::resetPli() {
 
 void JouerLeJeux::transition() {
     resetPli();
-    cerr << "Preneur equipe nb bout :" << partie->getEquipeByJoueur(partie->getPreneur())->getNbBouts() << endl;
     partie->compterPoint();
-    int i = 0;
-    for(shared_ptr<Joueur> joueur : partie->getClassement()->getClassement()) {
-        cerr << i << "- "+joueur->getNom() << " avec " << joueur->getPoints() << endl;
-        i++;
-    }
     partie->getClassement()->show();
     partie->setEtat(make_shared<Distribuer>(partie));
 }

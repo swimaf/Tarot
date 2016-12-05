@@ -42,6 +42,7 @@ class Joueur
         void removeSelectable();
         QVector<shared_ptr<ACarte>> getSelectable();
         QLabel* ajouterLabel();
+        void setText(string text="");
 
     protected:
         string name;

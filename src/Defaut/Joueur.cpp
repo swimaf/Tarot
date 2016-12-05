@@ -132,3 +132,8 @@ QLabel* Joueur::ajouterLabel() {
     return label;
 }
 
+
+void Joueur::setText(string text) {
+    label->setText(QString::fromStdString(name+" \n"+text));
+}
+

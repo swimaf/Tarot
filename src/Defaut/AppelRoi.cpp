@@ -11,23 +11,45 @@
 
 AppelRoi::AppelRoi(shared_ptr<Partie> partie) : Etat(partie)
 {
-
-}
-
-void AppelRoi::demarrer() {
-    cerr << "###################### APPEL AU ROI ##############" << endl;
-
-    QVector<shared_ptr<ACarte>> rois;
+    isAppele = false;
     rois.push_back(make_shared<Carreau>(new Roi()));
     rois.push_back(make_shared<Coeur>(new Roi()));
     rois.push_back(make_shared<Pique>(new Roi()));
     rois.push_back(make_shared<Trefle>(new Roi()));
+}
 
-    shared_ptr<ACarte> roiAppele = partie->getPreneur()->appelerRoi(rois);
-    partie->setRoiAppele(roiAppele);
+void AppelRoi::demarrer() {
+    isAppele = true;
 
-    cerr << "Le roi qui a été appelé est le "+roiAppele->afficher() << endl;
+    if(partie->getPreneur()->isHumain()) {
+        partie->getPreneur()->appelerRoi(rois);
+    } else {
+        shared_ptr<ACarte> roiAppele = partie->getPreneur()->appelerRoi(rois);
+        partie->setRoiAppele(roiAppele);
+        partie->getFenetre()->setText("Le roi appelé :");
+        partie->getFenetre()->showRoi(roiAppele);
+        partie->getFenetre()->setVisibleContinuer(true);
+    }
+}
 
-    partie->setEtat(make_shared<CreationChien>(partie));
+void AppelRoi::demarrerHumain(int indexCarte) {
+    partie->setRoiAppele(rois[indexCarte]);
+    partie->getFenetre()->setText("Le roi appelé :");
+    partie->getFenetre()->showRoi(rois[indexCarte]);
+    partie->getFenetre()->setVisibleContinuer(true);
+    partie->getFenetre()->eraseRois();
+}
 
+void AppelRoi::transition() {
+    if(isAppele) {
+        partie->setEtat(make_shared<CreationChien>(partie));
+        partie->demarrer();
+    } else {
+        demarrer();
+    }
+}
+
+void AppelRoi::continuer() {
+    partie->getFenetre()->eraseRoi();
+    transition();
 }

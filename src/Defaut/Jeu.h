@@ -8,7 +8,6 @@
 #include <memory>
 
 
-class QTimer;
 class Jeu : public QObject
 {
     Q_OBJECT
@@ -17,16 +16,11 @@ class Jeu : public QObject
         Jeu();
         QVector<shared_ptr<Joueur>> creerJoueur();
         void exec();
-        virtual ~Jeu() {};
-
-
-    public slots:
-        void lancer();
+        virtual ~Jeu() {}
 
 
     private :
          shared_ptr<Partie> partie;
-         QTimer *timer;
 };
 
 #endif // JEU_H
