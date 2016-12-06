@@ -9,6 +9,8 @@
 #include <QLabel>
 #include "../Defaut/Joueur.h"
 
+class Partie;
+
 class FenetreJeux : public QMainWindow
 {
     Q_OBJECT

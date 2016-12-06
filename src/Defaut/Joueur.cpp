@@ -6,7 +6,7 @@
 #include "Equipe.h"
 #include "Partie.h"
 
-Joueur::Joueur(string n) : name(n), points(0){
+Joueur::Joueur(string n) : name(n), points(0), humain(new Humain), ia(new IA), strategieCourante(humain){
 }
 
 
@@ -14,7 +14,7 @@ QVector<shared_ptr<ACarte>> Joueur::getJeux() {
     return jeux;
 }
 
-string Joueur::getNom() const {
+string Joueur::getNom() {
     return name;
 }
 void Joueur::clearCartes() {
@@ -54,7 +54,7 @@ void Joueur::ajouterPoints(int point){
     points+=point;
 }
 
-bool Joueur::operator== (const Joueur* joueur) const {
+bool Joueur::operator== (Joueur* joueur) {
     return name.compare(joueur->getNom()) == 0;
 }
 
@@ -137,3 +137,50 @@ void Joueur::setText(string text) {
     label->setText(QString::fromStdString(name+" \n"+text));
 }
 
+bool Joueur::choixEnchere(shared_ptr<Partie> *partie){
+    return strategieCourante.get()->choixEnchere(*partie, shared_from_this());
+}
+
+shared_ptr<ACarte> Joueur::appelerRoi(QVector<shared_ptr<ACarte>> rois){
+    return strategieCourante.get()->appelerRoi(rois, shared_from_this());
+}
+
+QVector<shared_ptr<ACarte>> Joueur::selectionCartesChien(int taille){
+    return strategieCourante.get()->selectionCartesChien(taille, shared_from_this());
+}
+
+void Joueur::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie){
+    strategieCourante.get()->selectionCarteAJouer(*pli,*partie, shared_from_this());
+}
+
+bool Joueur::isHumain(){
+    return strategieCourante.get()->isHumain();
+}
+
+void Joueur::ajouterCarte(shared_ptr<ACarte> carte){
+    strategieCourante.get()->ajouterCarte(carte, shared_from_this());
+}
+
+QString Joueur::getType() {
+    return strategieCourante.get()->getType()
+}
+
+void Joueur::changerStrategieIA(){
+    strategieCourante = ia;
+}
+
+void Joueur::changerStrategieHumain(){
+    strategieCourante = humain;
+}
+
+void Joueur::addWidgetToAction(QWidget *q){
+    action.get()->addWidget(q);
+}
+
+void Joueur::setSelectable(QVector<shared_ptr<ACarte>> s){
+    selectable = s;
+}
+
+void Joueur::addWidgetToEmplacement(QWidget *q){
+    emplacement.get()->addWidget(q);
+}

@@ -51,7 +51,8 @@ SOURCES += src/main.cpp \
     src/Carte/Valet.cpp \
     src/Fenetre/FenetreJeux.cpp \
     src/Defaut/Jeu.cpp \
-    src/Fenetre/FenetreClassement.cpp
+    src/Fenetre/FenetreClassement.cpp \
+    src/Defaut/StrategieJeu.cpp
 
 HEADERS += \
     src/Fenetre/Sleeper.h \
@@ -95,5 +96,6 @@ HEADERS += \
     src/Carte/Valet.h \
     src/Fenetre/FenetreJeux.h \
     src/Defaut/Jeu.h \
-    src/Fenetre/FenetreClassement.h
+    src/Fenetre/FenetreClassement.h \
+    src/Defaut/StrategieJeu.h
 
