@@ -139,7 +139,7 @@ void IA::ajouterCarte(shared_ptr<ACarte> carte) {
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png');");
+                          "border-image :  url(../tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png);");
     emplacement->addWidget(bouton);
     jeux.push_back(carte);
 }

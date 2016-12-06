@@ -232,7 +232,7 @@ void FenetreJeux::showRoi(shared_ptr<ACarte> roi) {
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png') 0 0 0 0 stretch stretch;");
+                          "border-image :  url(../tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png) 0 0 0 0 stretch stretch;");
     milieu->addWidget(bouton);
 }
 

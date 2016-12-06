@@ -39,22 +39,10 @@ shared_ptr<ACarte> Humain::appelerRoi(QVector<shared_ptr<ACarte>> rois) {
                               "width:100%;"
                               "max-height: 100%;"
                               "max-width: 70%;"
-                              "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png') 0 0 0 0 stretch stretch;");
+                              "border-image :  url(../tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png) 0 0 0 0 stretch stretch;");
         action->addWidget(bouton);
         Partie::fenetre->ajouterActionRoi(bouton);
     }
-
-    /*cerr << "Choisir votre roi :" << endl;
-    int i=0;
-    for(shared_ptr<ACarte> roi : rois) {
-        cerr << i<< ") "<< roi->afficher() << endl;
-        i++;
-    }
-    string stream;
-    cin >> stream;
-    shared_ptr<ACarte> roiAppele = rois[stoi(stream)];
-    cerr << "Vous avez choisie le :" + roiAppele->afficher() << endl;*/
-
     return NULL;
 }
 
@@ -101,7 +89,7 @@ void Humain::ajouterCarte(shared_ptr<ACarte> carte) {
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('/home/martinet/Documents/L3/Pattern/Projet/tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png') 0 0 0 0 stretch stretch;");
+                          "border-image :  url(../tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png) 0 0 0 0 stretch stretch;");
     emplacement->addWidget(bouton);
     Partie::fenetre->ajouterAction(bouton);
     jeux.push_back(carte);
