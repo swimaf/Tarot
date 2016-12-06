@@ -99,7 +99,7 @@ void JouerLeJeux::resetPli() {
 void JouerLeJeux::transition() {
     resetPli();
     partie->compterPoint();
-    partie->getClassement()->show();
+    partie;
     partie->setEtat(make_shared<Distribuer>(partie));
 }
 

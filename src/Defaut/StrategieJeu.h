@@ -1,12 +1,12 @@
 #ifndef STRATEGIEJEU_H
 #define STRATEGIEJEU_H
 
-#include "../Carte/ACarte.h"
 #include <memory>
 #include <QVector>
 #include <QString>
 #include "Pli.h"
 #include "Joueur.h"
+#include "../Carte/ACarte.h"
 
 class Partie;
 
@@ -14,8 +14,6 @@ class StrategieJeu
 {
 public:
     StrategieJeu();
-
-protected:
     virtual bool choixEnchere(shared_ptr<Partie> *partie, shared_ptr<Joueur> joueur) = 0;
     virtual shared_ptr<ACarte> appelerRoi(QVector<shared_ptr<ACarte>> rois, shared_ptr<Joueur> joueur) = 0;
     virtual QVector<shared_ptr<ACarte>> selectionCartesChien(int taille, shared_ptr<Joueur> joueur) = 0;

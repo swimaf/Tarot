@@ -5,8 +5,14 @@
 #include "../Carte/Excuse.h"
 #include "Equipe.h"
 #include "Partie.h"
+#include "StrategieJeu.h"
+#include "Humain.h"
+#include "IA.h"
 
-Joueur::Joueur(string n) : name(n), points(0), humain(new Humain), ia(new IA), strategieCourante(humain){
+Joueur::Joueur(string n) : name(n), points(0){
+    humain = make_shared<Humain>(new Humain);
+    ia = make_shared<IA>(new IA);
+    strategieCourante = humain;
 }
 
 
@@ -138,7 +144,7 @@ void Joueur::setText(string text) {
 }
 
 bool Joueur::choixEnchere(shared_ptr<Partie> *partie){
-    return strategieCourante.get()->choixEnchere(*partie, shared_from_this());
+    return strategieCourante.get()->choixEnchere(partie, shared_from_this());
 }
 
 shared_ptr<ACarte> Joueur::appelerRoi(QVector<shared_ptr<ACarte>> rois){
@@ -150,7 +156,7 @@ QVector<shared_ptr<ACarte>> Joueur::selectionCartesChien(int taille){
 }
 
 void Joueur::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie){
-    strategieCourante.get()->selectionCarteAJouer(*pli,*partie, shared_from_this());
+    strategieCourante.get()->selectionCarteAJouer(pli,partie, shared_from_this());
 }
 
 bool Joueur::isHumain(){
@@ -162,7 +168,7 @@ void Joueur::ajouterCarte(shared_ptr<ACarte> carte){
 }
 
 QString Joueur::getType() {
-    return strategieCourante.get()->getType()
+    return strategieCourante.get()->getType();
 }
 
 void Joueur::changerStrategieIA(){

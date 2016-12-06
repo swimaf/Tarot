@@ -1,7 +1,6 @@
 #ifndef IA_H
 #define IA_H
 
-#include <memory>
 #include "StrategieJeu.h"
 
 class IA : public StrategieJeu

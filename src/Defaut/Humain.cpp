@@ -9,7 +9,7 @@
 #include "../Carte/Excuse.h"
 #include "Constantes.h"
 
-Humain::Humain()
+Humain::Humain() : StrategieJeu()
 {
 
 }

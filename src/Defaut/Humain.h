@@ -2,11 +2,6 @@
 #define HUMAIN_H
 
 #include "StrategieJeu.h"
-#include <memory>
-#include "Partie.h"
-#include "Joueur.h"
-#include "Pli.h"
-#include "../Carte/ACarte.h"
 
 class Humain : public StrategieJeu
 {

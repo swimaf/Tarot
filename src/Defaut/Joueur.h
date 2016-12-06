@@ -10,8 +10,6 @@
 #include "Niveau.h"
 #include "Pli.h"
 #include <QBoxLayout>
-#include "IA.h"
-#include "Humain.h"
 #include <QWidget>
 
 using namespace std;
