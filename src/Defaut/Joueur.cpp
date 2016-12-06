@@ -1,6 +1,7 @@
 #include "Joueur.h"
 #include <QCoreApplication>
 #include <iostream>
+#include <memory>
 #include "Constantes.h"
 #include "../Carte/Excuse.h"
 #include "Equipe.h"
