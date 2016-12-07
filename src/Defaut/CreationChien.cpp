@@ -1,6 +1,4 @@
 #include "CreationChien.h"
-#include <QCoreApplication>
-#include <iostream>
 #include "JouerLeJeux.h"
 
 CreationChien::CreationChien(shared_ptr<Partie> partie) : Etat(partie)
@@ -17,9 +15,7 @@ void CreationChien::demarrer() {
         partie->getPreneur()->ajouterCarte(carte);
     }
     partie->getChien()->montrerChien();
-    cerr << "TEST1";
     partie->getChien()->clearCartes(false);
-    cerr << "TEST2";
 
     for(shared_ptr<Joueur> joueur:partie->getJoueurs()){
         joueur->trierJeux();

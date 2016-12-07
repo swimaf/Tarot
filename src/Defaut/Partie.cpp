@@ -1,7 +1,5 @@
 #include "Partie.h"
 #include "Distribuer.h"
-#include <QCoreApplication>
-#include <iostream>
 #include "Passer.h"
 #include "../Fenetre/FenetreJeux.h"
 #include "../Defaut/Constantes.h"
@@ -138,7 +136,7 @@ void Partie::compterPoint() {
                     nbAdversaire += joueurs.size();
                 }
             }
-            nbAdversaire -= nbAdversaire == 5 ? equipe->getJoueurs().size()-1 : equipe->getJoueurs().size();
+            nbAdversaire -= nbAdversaire == 5 ? equipe->getJoueurs().size()+1 : equipe->getJoueurs().size();
             string affichage = "";
             for(shared_ptr<Joueur> joueur:equipe->getJoueurs()) {
                 if(joueur == preneur) {

@@ -13,8 +13,8 @@ class Jeu : public QObject
     Q_OBJECT
 
     public:
-        Jeu();
-        QVector<shared_ptr<Joueur>> creerJoueur();
+        Jeu(int);
+        QVector<shared_ptr<Joueur>> creerJoueur(int);
         void exec();
         virtual ~Jeu() {}
 

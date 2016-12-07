@@ -1,6 +1,4 @@
 #include "Equipe.h"
-#include <QCoreApplication>
-#include <iostream>
 
 Equipe::Equipe(QVector<shared_ptr<Joueur>> joueur) : points(0), nbBouts(0), joueurs(joueur)
 {}
@@ -55,11 +53,3 @@ bool Equipe::operator== (Equipe* equipe) {
     }
     return true;
 }
-
-void Equipe::afficher(){
-    cerr << "EQUIPE" << endl;
-    for(shared_ptr<Joueur> j : joueurs) {
-        cerr << j->getNom() << " ,";
-    }
-}
-

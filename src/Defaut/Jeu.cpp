@@ -2,11 +2,13 @@
 #include "Distribuer.h"
 #include "Paquet.h"
 #include <QTimer>
+#include "Humain.h"
+#include "IA.h"
 
-Jeu::Jeu()
+Jeu::Jeu(int nbJoueur)
 {
 
-    QVector<shared_ptr<Joueur>> joueurs = creerJoueur();
+    QVector<shared_ptr<Joueur>> joueurs = creerJoueur(nbJoueur);
 
     shared_ptr<Paquet> paquet = Paquet::getInstance();
     paquet->melanger();
@@ -21,13 +23,17 @@ void Jeu::exec() {
 }
 
 
-QVector<shared_ptr<Joueur>> Jeu::creerJoueur() {
+QVector<shared_ptr<Joueur>> Jeu::creerJoueur(int nbJoueur) {
     QVector<shared_ptr<Joueur>> joueurs;
-    joueurs.push_back(make_shared<IA>("Etienne"));
-    joueurs.push_back(make_shared<IA>("Lea"));
-    joueurs.push_back(make_shared<IA>("Francoise"));
-    //joueurs.push_back(make_shared<IA>("Simon"));
-    joueurs.push_back(make_shared<Humain>("Pierre"));
+    if(nbJoueur > 3) {
+        joueurs.push_back(make_shared<Joueur>("Etienne",  make_shared<IA>()));
+    }
+    if(nbJoueur > 4) {
+        joueurs.push_back(make_shared<Joueur>("Lea", make_shared<IA>()));
+    }
+    joueurs.push_back(make_shared<Joueur>("Francoise",  make_shared<IA>()));
+    joueurs.push_back(make_shared<Joueur>("Simon",  make_shared<IA>()));
+    joueurs.push_back(make_shared<Joueur>("Pierre", make_shared<Humain>()));
 
     return joueurs;
 }

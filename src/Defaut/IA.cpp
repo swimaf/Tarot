@@ -15,12 +15,12 @@ IA::IA() : StrategieJeu()
 }
 
 
-bool IA::choixEnchere(shared_ptr<Partie> *partie, shared_ptr<Joueur> joueur){
+bool IA::choixEnchere(shared_ptr<Partie> *partie, QVector<shared_ptr<ACarte>> jeux){
 
     int index       = partie->get()->getNiveaux().indexOf(partie->get()->getEnchere());
-    int nbAtout     = ACarte::compterNbAtout(joueur.get()->getJeux());
-    int nbBout      = ACarte::compterNbBout(joueur.get()->getJeux());
-    int nbValeurs   = ACarte::compterPoint(joueur.get()->getJeux());
+    int nbAtout     = ACarte::compterNbAtout(jeux);
+    int nbBout      = ACarte::compterNbBout(jeux);
+    int nbValeurs   = ACarte::compterPoint(jeux);
 
     int nbJoueurs = partie->get()->getJoueurs().size();
     int coeff = nbAtout * Constantes::COEFF_ATOUT + nbBout * Constantes::COEFF_BOUT + nbValeurs*Constantes::COEFF_VALEUR + nbJoueurs*10;
@@ -43,10 +43,6 @@ shared_ptr<ACarte> IA::appelerRoi(QVector<shared_ptr<ACarte>> allRois, shared_pt
     copy(allRois.begin(), allRois.end(), back_inserter(listRoi));
 
     QVector<shared_ptr<ACarte>> rois = ACarte::getRois(joueur.get()->getJeux());
-    cerr << "Possède :" << endl;
-    for(shared_ptr<ACarte> roi : rois) {
-        cerr << roi->afficher() << endl;
-    }
 
     for(int i=0; i<allRois.size(); ++i) {
         for(shared_ptr<ACarte> roi : rois) {
@@ -56,11 +52,6 @@ shared_ptr<ACarte> IA::appelerRoi(QVector<shared_ptr<ACarte>> allRois, shared_pt
         }
     }
 
-    cerr << "Peux choisir :" << endl;
-
-    for(shared_ptr<ACarte> roi : listRoi) {
-        cerr << roi->afficher() << endl;
-    }
     if(listRoi.size() == 0) {
         /** A REDEFINIR CHOISIR LA REINE SI IL A TOUT LES ROIS **/
         return rois[0];
@@ -70,14 +61,14 @@ shared_ptr<ACarte> IA::appelerRoi(QVector<shared_ptr<ACarte>> allRois, shared_pt
     return *carte;
 }
 
-QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille, shared_ptr<Joueur> joueur){
+QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille, QVector<shared_ptr<ACarte>> jeux){
     QVector<shared_ptr<ACarte>> chien;
 
     QVector<QVector<shared_ptr<ACarte>>> formes;
-    formes.push_back(Filtre<Trefle, ACarte>::filtreClass(joueur.get()->getJeux(), false));
-    formes.push_back(Filtre<Pique, ACarte>::filtreClass(joueur.get()->getJeux(), false));
-    formes.push_back(Filtre<Coeur, ACarte>::filtreClass(joueur.get()->getJeux(), false));
-    formes.push_back(Filtre<Carreau, ACarte>::filtreClass(joueur.get()->getJeux(), false));
+    formes.push_back(Filtre<Trefle, ACarte>::filtreClass(jeux, false));
+    formes.push_back(Filtre<Pique, ACarte>::filtreClass(jeux, false));
+    formes.push_back(Filtre<Coeur, ACarte>::filtreClass(jeux, false));
+    formes.push_back(Filtre<Carreau, ACarte>::filtreClass(jeux, false));
 
     sort(formes.begin(), formes.end(), Constantes::compare);
 
@@ -98,12 +89,12 @@ QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille, shared_ptr<Joue
 void IA::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie, shared_ptr<Joueur> joueur){
     if(pli->getCartes().isEmpty()) {
         QVector<QVector<shared_ptr<ACarte>>> formes;
-        formes.push_back(Filtre<Trefle, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-        formes.push_back(Filtre<Pique, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-        formes.push_back(Filtre<Coeur, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-        formes.push_back(Filtre<Carreau, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-        formes.push_back(Filtre<Atout, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-        formes.push_back(Filtre<Excuse, ACarte>::filtreClass(joueur.get()->getJeux(), true));
+        formes.push_back(Filtre<Trefle, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre<Pique, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre<Coeur, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre<Carreau, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre<Atout, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre<Excuse, ACarte>::filtreClass(joueur->getJeux(), true));
 
         for(QVector<shared_ptr<ACarte>> f:formes) {
             if(!f.isEmpty()) {
@@ -123,22 +114,19 @@ bool IA::isHumain(){
     return false;
 }
 
-void IA::ajouterCarte(shared_ptr<ACarte> carte, shared_ptr<Joueur> joueur){
+QPushButton* IA::ajouterCarte(shared_ptr<ACarte> carte){
+
     QPushButton *bouton = new QPushButton("");
     bouton->setStyleSheet("height:100%;"
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('../Tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png');");
-    joueur.get()->addWidgetToEmplacement(bouton);
-    joueur.get()->getJeux().push_back(carte);
+                          "border-image :  url('../Tarot/img/cards/back.png');");
+    return bouton;
 }
 
 QString IA::getType() {
     return "IA";
 }
 
-
-void IA::trierJeux(shared_ptr<Joueur> joueur) {
-
-}
+void IA::trierJeux(shared_ptr<Joueur> joueur) {}

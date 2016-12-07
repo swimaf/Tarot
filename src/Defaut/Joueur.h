@@ -9,6 +9,7 @@
 #include "../Carte/ACarte.h"
 #include "Niveau.h"
 #include "Pli.h"
+#include "IA.h"
 #include <QBoxLayout>
 #include <QWidget>
 
@@ -19,7 +20,7 @@ class Partie;
 class Joueur  : public enable_shared_from_this<Joueur>
 {
     public:
-        Joueur(string n);
+        Joueur(string n, shared_ptr<StrategieJeu> strategie );
         QString getType();
         QVector<shared_ptr<ACarte>> getJeux();
         bool choixEnchere(shared_ptr<Partie> *partie);
@@ -46,8 +47,7 @@ class Joueur  : public enable_shared_from_this<Joueur>
         QVector<shared_ptr<ACarte>> getSelectable();
         QLabel* ajouterLabel();
         void setText(string text="");
-        void changerStrategieIA();
-        void changerStrategieHumain();
+        void changerStrategie(shared_ptr<StrategieJeu>);
         void addWidgetToAction(QWidget *q);
         void addWidgetToEmplacement(QWidget *q);
         void setSelectable(QVector<shared_ptr<ACarte>> s);
@@ -61,8 +61,6 @@ class Joueur  : public enable_shared_from_this<Joueur>
         QLabel* label;
         int points;
         shared_ptr<StrategieJeu> strategieCourante;
-        shared_ptr<StrategieJeu> humain;
-        shared_ptr<StrategieJeu> ia;
 };
 
 #endif // JOUEUR_H

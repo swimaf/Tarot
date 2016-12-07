@@ -52,10 +52,10 @@ SOURCES += src/main.cpp \
     src/Fenetre/FenetreJeux.cpp \
     src/Defaut/Jeu.cpp \
     src/Fenetre/FenetreClassement.cpp \
-    src/Defaut/StrategieJeu.cpp
+    src/Defaut/StrategieJeu.cpp \
+    src/Fenetre/FenetreParametre.cpp
 
 HEADERS += \
-    src/Fenetre/Sleeper.h \
     src/Carte/ACarte.h \
     src/Carte/AForme.h \
     src/Carte/Atout.h \
@@ -97,5 +97,6 @@ HEADERS += \
     src/Fenetre/FenetreJeux.h \
     src/Defaut/Jeu.h \
     src/Fenetre/FenetreClassement.h \
-    src/Defaut/StrategieJeu.h
+    src/Defaut/StrategieJeu.h \
+    src/Fenetre/FenetreParametre.h
 

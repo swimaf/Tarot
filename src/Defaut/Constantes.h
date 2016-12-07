@@ -4,8 +4,6 @@
 #include <QVector>
 #include <memory>
 #include "../Carte/ACarte.h"
-#include <iostream>
-#include <QCoreApplication>
 
 
 class Constantes

@@ -6,9 +6,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <string>
-#include "Sleeper.h"
-#include <iostream>
-#include <QCoreApplication>
 #include "../Defaut/Passer.h"
 #include "../Defaut/Partie.h"
 #include <QLabel>
@@ -51,13 +48,11 @@ FenetreJeux::FenetreJeux(QWidget *parent) : QMainWindow(parent)
     gridLayout->addLayout(centre, 1,1, 3 , 3);
 
     window->setLayout(gridLayout);
-    setFixedWidth(1000);
-    setFixedHeight(700);
-
+    setFixedHeight(screenHeight-80);
+    setFixedWidth(screenWidth);
     setCentralWidget(window);
-    setGeometry((screenWidth/2)-(1000/2),(screenHeight/2)-(700/2),1000,700);
     setStyleSheet("background : #007614;");
-    show();
+    showNormal();
 
 }
 
@@ -114,6 +109,7 @@ void FenetreJeux::pushButtonClicked() {
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     int indexCarte = joueur->getEmplacement()->indexOf(button);
     partie->demarrerHumain(indexCarte);
+
 }
 
 void FenetreJeux::onContinuer() {
@@ -128,12 +124,10 @@ void FenetreJeux::onClickRoi() {
 }
 
 void FenetreJeux::eraseRois() {
-
     delete joueur->getBoutons()->itemAt(3)->widget();
     delete joueur->getBoutons()->itemAt(3)->widget();
     delete joueur->getBoutons()->itemAt(3)->widget();
     delete joueur->getBoutons()->itemAt(3)->widget();
-
 }
 
 
@@ -232,7 +226,7 @@ void FenetreJeux::showRoi(shared_ptr<ACarte> roi) {
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url(../tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png) 0 0 0 0 stretch stretch;");
+                          "border-image :  url(../Tarot/img/cards/"+QString::fromStdString(roi->getURL())+".png) 0 0 0 0 stretch stretch;");
     milieu->addWidget(bouton);
 }
 

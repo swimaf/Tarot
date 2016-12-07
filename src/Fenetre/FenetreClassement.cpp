@@ -3,8 +3,6 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPushButton>
-#include <QCoreApplication>
-#include <iostream>
 #include "../Defaut/Partie.h"
 
 FenetreClassement::FenetreClassement(QWidget *parent) : QMainWindow(parent)
@@ -49,7 +47,6 @@ void FenetreClassement::updateAndShow(QVector<shared_ptr<Joueur>> joueurs) {
         tableWidget->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(joueur->getNom())));
         tableWidget->setItem(i, 1, new QTableWidgetItem(QString::number(joueur->getPoints())));
         tableWidget->setItem(i, 2, new QTableWidgetItem(joueur->getType()));
-        cerr << joueur->getPoints();
         i++;
     }
     show();

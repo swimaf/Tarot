@@ -2,6 +2,7 @@
 #define FENETREPARAMETRE_H
 
 #include <QMainWindow>
+#include <QComboBox>
 
 class FenetreParametre : public QMainWindow
 {
@@ -12,7 +13,10 @@ public:
 signals:
 
 public slots:
+    void onValider();
 
+public:
+     QComboBox* nombreJoueurs;
 };
 
 #endif // FENETREPARAMETRE_H

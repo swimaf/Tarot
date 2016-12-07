@@ -1,7 +1,5 @@
 #include "AppelRoi.h"
 
-#include <QCoreApplication>
-#include <iostream>
 #include "CreationChien.h"
 #include "../Carte/Trefle.h"
 #include "../Carte/Coeur.h"

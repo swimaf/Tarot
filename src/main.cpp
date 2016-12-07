@@ -1,21 +1,13 @@
-#include <iostream>
-#include <QVector>
-
 #include <QApplication>
-#include <thread>
-#include <stdio.h>
-#include "Defaut/Jeu.h"
+#include "Fenetre/FenetreParametre.h"
 
 using namespace std;
 
 
 int main(int argc, char *argv[])
 {
-
     QApplication a(argc, argv);
-    Jeu jeu;
-    jeu.exec();
-
+    FenetreParametre f;
     return a.exec();
 }
 

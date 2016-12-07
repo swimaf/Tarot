@@ -7,10 +7,9 @@
 #include "Chien.h"
 #include "Paquet.h"
 #include "Equipe.h"
+#include "Classement.h"
 #include "../Fenetre/FenetreJeux.h"
 
-class Classement;
-class Equipe;
 class Etat;
 class Partie : public enable_shared_from_this<Partie>
 {

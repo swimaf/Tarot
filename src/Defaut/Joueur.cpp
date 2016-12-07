@@ -1,6 +1,4 @@
 #include "Joueur.h"
-#include <QCoreApplication>
-#include <iostream>
 #include <memory>
 #include "Constantes.h"
 #include "../Carte/Excuse.h"
@@ -10,10 +8,7 @@
 #include "Humain.h"
 #include "IA.h"
 
-Joueur::Joueur(string n) : name(n), points(0){
-    humain = make_shared<Humain>(new Humain);
-    ia = make_shared<IA>(new IA);
-    strategieCourante = humain;
+Joueur::Joueur(string n, shared_ptr<StrategieJeu> strategie) : name(n), points(0), strategieCourante(strategie){
 }
 
 
@@ -50,7 +45,9 @@ void Joueur::removeCarte(shared_ptr<ACarte> carte, bool removeButton) {
     jeux.remove(index);
 }
 
-void Joueur::trierJeux() {}
+void Joueur::trierJeux() {
+    strategieCourante->trierJeux(shared_from_this());
+}
 
 
 int Joueur::getPoints(){
@@ -120,6 +117,11 @@ void Joueur::jouerCarte(shared_ptr<ACarte> carte) {
     QWidget *button = emplacement->itemAt(index)->widget();
     emplacement->removeWidget(button);
     action->itemAt(0)->widget()->setVisible(false);
+    button->setStyleSheet("height:100%;"
+                          "width:100%;"
+                          "max-height: 100%;"
+                          "max-width: 70%;"
+                          "border-image :  url(../Tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png) 0 0 0 0 stretch stretch;");
     action->insertWidget(1, button);
 }
 
@@ -145,43 +147,42 @@ void Joueur::setText(string text) {
 }
 
 bool Joueur::choixEnchere(shared_ptr<Partie> *partie){
-    return strategieCourante.get()->choixEnchere(partie, shared_from_this());
+    return strategieCourante->choixEnchere(partie, jeux);
 }
 
 shared_ptr<ACarte> Joueur::appelerRoi(QVector<shared_ptr<ACarte>> rois){
-    return strategieCourante.get()->appelerRoi(rois, shared_from_this());
+    return strategieCourante->appelerRoi(rois, shared_from_this());
 }
 
 QVector<shared_ptr<ACarte>> Joueur::selectionCartesChien(int taille){
-    return strategieCourante.get()->selectionCartesChien(taille, shared_from_this());
+    return strategieCourante->selectionCartesChien(taille, jeux);
 }
 
 void Joueur::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie){
-    strategieCourante.get()->selectionCarteAJouer(pli,partie, shared_from_this());
+    strategieCourante->selectionCarteAJouer(pli,partie, shared_from_this());
 }
 
 bool Joueur::isHumain(){
-    return strategieCourante.get()->isHumain();
+    return strategieCourante->isHumain();
 }
 
 void Joueur::ajouterCarte(shared_ptr<ACarte> carte){
-    strategieCourante.get()->ajouterCarte(carte, shared_from_this());
+    emplacement->addWidget(strategieCourante->ajouterCarte(carte));
+    jeux.push_back(carte);
 }
 
 QString Joueur::getType() {
-    return strategieCourante.get()->getType();
+    return strategieCourante->getType();
 }
 
-void Joueur::changerStrategieIA(){
-    strategieCourante = ia;
+void Joueur::changerStrategie(shared_ptr<StrategieJeu> strat){
+    strategieCourante = strat;
 }
 
-void Joueur::changerStrategieHumain(){
-    strategieCourante = humain;
-}
+
 
 void Joueur::addWidgetToAction(QWidget *q){
-    action.get()->addWidget(q);
+    action->addWidget(q);
 }
 
 void Joueur::setSelectable(QVector<shared_ptr<ACarte>> s){
@@ -189,5 +190,5 @@ void Joueur::setSelectable(QVector<shared_ptr<ACarte>> s){
 }
 
 void Joueur::addWidgetToEmplacement(QWidget *q){
-    emplacement.get()->addWidget(q);
+    emplacement->addWidget(q);
 }

@@ -1,6 +1,4 @@
 #include "Enchere.h"
-#include <QCoreApplication>
-#include <iostream>
 #include "Passer.h"
 #include "Distribuer.h"
 #include "AppelRoi.h"
@@ -78,7 +76,6 @@ void Enchere::recupererCarteSurTable() {
     }
 
     partie->getPaquet()->ajouterCartes(partie->getChien()->getCartes());
-
     partie->getChien()->clearCartes(true);
 
 }

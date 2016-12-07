@@ -14,7 +14,6 @@ void Distribuer::demarrer() {
     partie->getPaquet()->couper();
     partie->clearEquipes();
     partie->getPreneur() = NULL;
-
     /**
      * Création du chien
      * */
@@ -39,12 +38,14 @@ void Distribuer::demarrer() {
     int nbCartesPar3 = 0;
 
     for(i = partie->getChien()->getTaille(); i< Constantes::NB_CARTES; ++i) {
+
         if(nbCartesPar3 > 2) {
             joueurCourant = (joueurCourant == (nbJoueur-1)) ? 0 : joueurCourant+1;
             nbCartesPar3 = 0;
         }
         partie->getJoueurs()[joueurCourant]->ajouterCarte(partie->getPaquet()->getCartes().at(i));
         nbCartesPar3++;
+
     }
 
 

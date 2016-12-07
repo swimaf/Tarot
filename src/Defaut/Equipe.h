@@ -18,7 +18,6 @@ class Equipe
         void ajouterBout(int nb);
         void joindreEquipe(shared_ptr<Equipe> equipe);
         bool operator== (Equipe* equipe);
-        void afficher();
 
 
     private:

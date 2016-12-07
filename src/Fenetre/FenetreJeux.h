@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QPushButton>
-#include "Sleeper.h"
 #include <memory>
 #include <QLabel>
 #include "../Defaut/Joueur.h"

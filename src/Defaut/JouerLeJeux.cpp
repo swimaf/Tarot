@@ -1,6 +1,4 @@
 #include "JouerLeJeux.h"
-#include <QCoreApplication>
-#include <iostream>
 #include <QVector>
 #include "Distribuer.h"
 #include "Pli.h"
@@ -99,7 +97,7 @@ void JouerLeJeux::resetPli() {
 void JouerLeJeux::transition() {
     resetPli();
     partie->compterPoint();
-    partie;
+    partie->getClassement()->show();
     partie->setEtat(make_shared<Distribuer>(partie));
 }
 
