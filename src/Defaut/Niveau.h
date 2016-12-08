@@ -4,7 +4,7 @@
 #include <memory>
 
 using namespace std;
-
+//Niveau permet de definir l'ensemble des niveau
 class Niveau
 {
     public:

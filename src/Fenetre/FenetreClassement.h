@@ -6,11 +6,14 @@
 #include <memory>
 #include "../Defaut/Joueur.h"
 
+
+//Fenetre de classement permettant de visualiser les scores
 class FenetreClassement : public QMainWindow
 {
     Q_OBJECT
 public:
     explicit FenetreClassement(QWidget *parent = 0);
+    //On modifie le classement et on affiche la fenetre
     void updateAndShow(QVector<shared_ptr<Joueur>> joueurs);
 
 signals:

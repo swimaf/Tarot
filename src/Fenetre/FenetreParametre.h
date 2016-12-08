@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QComboBox>
 
+//On choisit le nombre de joueur voulu
 class FenetreParametre : public QMainWindow
 {
     Q_OBJECT
