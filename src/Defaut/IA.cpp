@@ -122,7 +122,7 @@ QPushButton* IA::ajouterCarte(shared_ptr<ACarte> carte){
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('../Tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png');");
+                          "border-image :  url('../Tarot/img/cards/back.png');");
     return bouton;
 }
 

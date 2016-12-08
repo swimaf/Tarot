@@ -7,10 +7,12 @@
 
 using namespace std;
 
+// Classe abstraite
 class ACarte
 {
     public:
         ACarte(double valeur, int poids, string type, string name);
+        // Retourne l'URL de l'image la carte
         virtual string getURL() const = 0;
         virtual bool operator== (const ACarte* carte) const = 0;
         virtual string getName() const;
