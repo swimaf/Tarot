@@ -19,7 +19,7 @@ FenetreParametre::FenetreParametre(QWidget *parent) :
     QLabel* titre = new QLabel("Bienvenue sur le Tarot");
     titre->setStyleSheet("font-size:25px");
     titre->setAlignment(Qt::AlignHCenter);
-    QLabel* titre2 = new QLabel("Selectionner le nombre de joueurs");
+    QLabel* titre2 = new QLabel("Sélectionner le nombre de joueurs");
     titre2->setStyleSheet("font-size:15px; font-style:italic;");
     titre2->setAlignment(Qt::AlignHCenter);
 

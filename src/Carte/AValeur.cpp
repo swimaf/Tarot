@@ -13,7 +13,7 @@ string AValeur::getURL() const {
     }
 }
 
-string AValeur::getType() const{
+string AValeur::getType() const {
     if(forme==NULL)
         return getType();
     else

@@ -16,4 +16,4 @@ class Le21 : public Atout
 };
 
 
-#endif // LE31_H
+#endif // LE21_H

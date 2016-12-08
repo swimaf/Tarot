@@ -9,7 +9,7 @@ Enchere::Enchere(shared_ptr<Partie> partie) : Etat(partie)
 
 
 void Enchere::demarrer() {
-    partie->getFenetre()->setText("Vous pouvez encherir : ");
+    partie->getFenetre()->setText("Vous pouvez enchérir : ");
     partie->setEnchere(partie->getNiveaux()[0]);
     for(shared_ptr<Joueur> joueur: partie->getJoueurs()) {
         if(joueur->isHumain()) {
@@ -52,7 +52,7 @@ void Enchere::transition() {
         joueur->setText("");
     }
     if(partie->getPreneur() == NULL) {
-        partie->getFenetre()->setText("Il y a pas de preneur le jeux va être redistribué");
+        partie->getFenetre()->setText("Il y a pas de preneur le jeu va être redistribué");
         recupererCarteSurTable();
         partie->setEtat(make_shared<Distribuer>(partie));
 
