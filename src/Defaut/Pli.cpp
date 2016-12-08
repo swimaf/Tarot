@@ -14,7 +14,7 @@ int Pli::indexOfVainqueur(){
     string typeBase = cartes.begin()->second->getType();
     for (auto const& element : cartes) {
         if(element.second->isAtout() || typeBase.compare(element.second->getType()) == 0 ) {
-            if(cartes[meneur]->poids() < element.second->poids()) {
+            if(cartes[meneur]->getPoids() < element.second->getPoids()) {
                 meneur = element.first;
             }
         }

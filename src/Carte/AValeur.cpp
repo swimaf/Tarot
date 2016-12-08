@@ -1,23 +1,23 @@
 #include "AValeur.h"
 
-AValeur::AValeur(double valeur, int poids, shared_ptr<AForme> f) : AForme(valeur, "", poids), AForme(f)
+AValeur::AValeur(double valeur, int poids, shared_ptr<AForme> f) : AForme(valeur, "", poids), forme(f)
 {
 }
 
 string AValeur::getURL() const {
-    if(AForme == NULL){
+    if(forme == NULL){
         return getURL();
     }
     else {
-        return to_string(getPoids())+AForme->getURL();
+        return to_string(getPoids())+forme->getURL();
     }
 }
 
 string AValeur::getType() const{
-    if(AForme==NULL)
+    if(forme==NULL)
         return getType();
     else
-        return AForme->getType();
+        return forme->getType();
 }
 
 

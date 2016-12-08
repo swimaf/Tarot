@@ -1,6 +1,6 @@
 #include "Trefle.h"
 
-Trefle::Trefle():AForme(0, "Carreau", 0)
+Trefle::Trefle():AForme(0, "Trefle", 0)
 {
 
 }

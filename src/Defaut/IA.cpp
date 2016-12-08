@@ -65,10 +65,10 @@ QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille, QVector<shared_
     QVector<shared_ptr<ACarte>> chien;
 
     QVector<QVector<shared_ptr<ACarte>>> formes;
-    formes.push_back(Filtre<Trefle, ACarte>::filtreClass(jeux, false));
-    formes.push_back(Filtre<Pique, ACarte>::filtreClass(jeux, false));
-    formes.push_back(Filtre<Coeur, ACarte>::filtreClass(jeux, false));
-    formes.push_back(Filtre<Carreau, ACarte>::filtreClass(jeux, false));
+    formes.push_back(Filtre::execute(jeux, false, "Trefle"));
+    formes.push_back(Filtre::execute(jeux, false, "Coeur"));
+    formes.push_back(Filtre::execute(jeux, false, "Carreau"));
+    formes.push_back(Filtre::execute(jeux, false, "Pique"));
 
     sort(formes.begin(), formes.end(), Constantes::compare);
 
@@ -89,12 +89,13 @@ QVector<shared_ptr<ACarte>> IA::selectionCartesChien(int taille, QVector<shared_
 void IA::selectionCarteAJouer(Pli *pli, shared_ptr<Partie> *partie, shared_ptr<Joueur> joueur){
     if(pli->getCartes().isEmpty()) {
         QVector<QVector<shared_ptr<ACarte>>> formes;
-        formes.push_back(Filtre<Trefle, ACarte>::filtreClass(joueur->getJeux(), true));
-        formes.push_back(Filtre<Pique, ACarte>::filtreClass(joueur->getJeux(), true));
-        formes.push_back(Filtre<Coeur, ACarte>::filtreClass(joueur->getJeux(), true));
-        formes.push_back(Filtre<Carreau, ACarte>::filtreClass(joueur->getJeux(), true));
-        formes.push_back(Filtre<Atout, ACarte>::filtreClass(joueur->getJeux(), true));
-        formes.push_back(Filtre<Excuse, ACarte>::filtreClass(joueur->getJeux(), true));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Trefle"));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Coeur"));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Carreau"));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Pique"));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Atout"));
+        formes.push_back(Filtre::execute(joueur->getJeux(), true, "Excuse"));
+
 
         for(QVector<shared_ptr<ACarte>> f:formes) {
             if(!f.isEmpty()) {
@@ -121,7 +122,7 @@ QPushButton* IA::ajouterCarte(shared_ptr<ACarte> carte){
                           "width:100%;"
                           "max-height: 100%;"
                           "max-width: 70%;"
-                          "border-image :  url('../Tarot/img/cards/back.png');");
+                          "border-image :  url('../Tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png');");
     return bouton;
 }
 

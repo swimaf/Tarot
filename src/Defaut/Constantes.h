@@ -19,7 +19,7 @@ class Constantes
     }
 
     static bool sortJeux(shared_ptr<ACarte> a, shared_ptr<ACarte> b) {
-        return a->poids() < b->poids();
+        return a->getPoids() < b->getPoids();
     }
 
 

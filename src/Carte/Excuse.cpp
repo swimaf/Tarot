@@ -15,6 +15,6 @@ bool Excuse::operator== (const ACarte* carte) const {
 }
 
 string Excuse::getURL() const {
-    return name;
+    return to_string(poids);
 }
 

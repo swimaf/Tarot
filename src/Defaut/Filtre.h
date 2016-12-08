@@ -5,14 +5,14 @@
 #include "../Carte/ACarte.h"
 using namespace std;
 
-template <class T, class S>
+//template <class T, class S>
 class Filtre
 {
     public:
-        static QVector<shared_ptr<S>> filtreClass(QVector<shared_ptr<ACarte>> vec, bool withRoi) {
+        static QVector<shared_ptr<ACarte>> execute(QVector<shared_ptr<ACarte>> vec, bool withRoi, string type) {
             QVector<shared_ptr<ACarte>> v;
             for(shared_ptr<ACarte> element : vec) {
-                if(dynamic_pointer_cast<T>(element) != NULL) {
+                if(element->getType() == type) {
                     if(withRoi) {
                         v.push_back(element);
                     } else {

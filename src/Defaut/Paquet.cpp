@@ -23,31 +23,33 @@ shared_ptr<Paquet> Paquet::instance=make_shared<Paquet>();
 Paquet::Paquet()
 {
     for(int i=1; i<11; i++) {
-        cartes.push_back(make_shared<Simple>(i, make_shared<Coeur>());
-        cartes.push_back(make_shared<Pique>(new Simple(i)));
-        cartes.push_back(make_shared<Trefle>(new Simple(i)));
-        cartes.push_back(make_shared<Carreau>(new Simple(i)));
+        cartes.push_back(make_shared<Simple>(i, make_shared<Coeur>()));
+        cartes.push_back(make_shared<Simple>(i, make_shared<Carreau>()));
+        cartes.push_back(make_shared<Simple>(i, make_shared<Pique>()));
+        cartes.push_back(make_shared<Simple>(i, make_shared<Trefle>()));
+
     }
 
-    cartes.push_back(make_shared<Coeur>(new Valet()));
-    cartes.push_back(make_shared<Coeur>(new Cavalier()));
-    cartes.push_back(make_shared<Coeur>(new Dame()));
-    cartes.push_back(make_shared<Coeur>(new Roi()));
+    cartes.push_back(make_shared<Valet>(make_shared<Coeur>()));
+    cartes.push_back(make_shared<Cavalier>(make_shared<Coeur>()));
+    cartes.push_back(make_shared<Dame>(make_shared<Coeur>()));
+    cartes.push_back(make_shared<Roi>(make_shared<Coeur>()));
 
-    cartes.push_back(make_shared<Pique>(new Valet()));
-    cartes.push_back(make_shared<Pique>(new Cavalier()));
-    cartes.push_back(make_shared<Pique>(new Dame()));
-    cartes.push_back(make_shared<Pique>(new Roi()));
 
-    cartes.push_back(make_shared<Carreau>(new Valet()));
-    cartes.push_back(make_shared<Carreau>(new Cavalier()));
-    cartes.push_back(make_shared<Carreau>(new Dame()));
-    cartes.push_back(make_shared<Carreau>(new Roi()));
+    cartes.push_back(make_shared<Valet>(make_shared<Carreau>()));
+    cartes.push_back(make_shared<Cavalier>(make_shared<Carreau>()));
+    cartes.push_back(make_shared<Dame>(make_shared<Carreau>()));
+    cartes.push_back(make_shared<Roi>(make_shared<Carreau>()));
 
-    cartes.push_back(make_shared<Trefle>(new Valet()));
-    cartes.push_back(make_shared<Trefle>(new Cavalier()));
-    cartes.push_back(make_shared<Trefle>(new Dame()));
-    cartes.push_back(make_shared<Trefle>(new Roi()));
+    cartes.push_back(make_shared<Valet>(make_shared<Pique>()));
+    cartes.push_back(make_shared<Cavalier>(make_shared<Pique>()));
+    cartes.push_back(make_shared<Dame>(make_shared<Pique>()));
+    cartes.push_back(make_shared<Roi>(make_shared<Pique>()));
+
+    cartes.push_back(make_shared<Valet>(make_shared<Trefle>()));
+    cartes.push_back(make_shared<Cavalier>(make_shared<Trefle>()));
+    cartes.push_back(make_shared<Dame>(make_shared<Trefle>()));
+    cartes.push_back(make_shared<Roi>(make_shared<Trefle>()));
 
 
     cartes.push_back(make_shared<Excuse>());

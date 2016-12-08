@@ -81,7 +81,7 @@ QVector<shared_ptr<ACarte>> Joueur::getCartesJouable(Pli *pli) {
             copy(jeux.begin(), jeux.end(), back_inserter(cartes));
         } else {
             int joueur = pli->indexOfVainqueur();
-            QVector<shared_ptr<ACarte>> cartesAtouts = ACarte::filtreByValue(pli->getCarte(joueur)->poids(),cartes);
+            QVector<shared_ptr<ACarte>> cartesAtouts = ACarte::filtreByValue(pli->getCarte(joueur)->getPoids(),cartes);
             if(!cartesAtouts.isEmpty()) {
                 cartes = cartesAtouts;
             }
@@ -123,6 +123,7 @@ void Joueur::jouerCarte(shared_ptr<ACarte> carte) {
                           "max-width: 70%;"
                           "border-image :  url(../Tarot/img/cards/"+QString::fromStdString(carte->getURL())+".png) 0 0 0 0 stretch stretch;");
     action->insertWidget(1, button);
+    button->setEnabled(false);
 }
 
 void Joueur::resetEmplacement() {
@@ -178,8 +179,6 @@ QString Joueur::getType() {
 void Joueur::changerStrategie(shared_ptr<StrategieJeu> strat){
     strategieCourante = strat;
 }
-
-
 
 void Joueur::addWidgetToAction(QWidget *q){
     action->addWidget(q);

@@ -73,15 +73,16 @@ QString Humain::getType() {
 
 void Humain::trierJeux(shared_ptr<Joueur> joueur) {
     QVector<QVector<shared_ptr<ACarte>>> formes;
-    formes.push_back(Filtre<Trefle, ACarte>::filtreClass(joueur->getJeux(), true));
-    formes.push_back(Filtre<Pique, ACarte>::filtreClass(joueur->getJeux(), true));
-    formes.push_back(Filtre<Coeur, ACarte>::filtreClass(joueur->getJeux(), true));
-    formes.push_back(Filtre<Carreau, ACarte>::filtreClass(joueur->getJeux(), true));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Trefle"));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Coeur"));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Carreau"));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Pique"));
+
 
     sort(formes.begin(), formes.end(), Constantes::compare);
 
-    formes.push_back(Filtre<Atout, ACarte>::filtreClass(joueur.get()->getJeux(), true));
-    formes.push_back(Filtre<Excuse, ACarte>::filtreClass(joueur.get()->getJeux(), true));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Atout"));
+    formes.push_back(Filtre::execute(joueur->getJeux(), true, "Excuse"));
     joueur->clearCartes();
     for(QVector<shared_ptr<ACarte>> type : formes) {
         sort(type.begin(), type.end(), Constantes::sortJeux);

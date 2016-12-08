@@ -10,10 +10,10 @@
 AppelRoi::AppelRoi(shared_ptr<Partie> partie) : Etat(partie)
 {
     isAppele = false;
-    rois.push_back(make_shared<Carreau>(new Roi()));
-    rois.push_back(make_shared<Coeur>(new Roi()));
-    rois.push_back(make_shared<Pique>(new Roi()));
-    rois.push_back(make_shared<Trefle>(new Roi()));
+    rois.push_back(make_shared<Roi>(make_shared<Carreau>()));
+    rois.push_back(make_shared<Roi>(make_shared<Coeur>()));
+    rois.push_back(make_shared<Roi>(make_shared<Pique>()));
+    rois.push_back(make_shared<Roi>(make_shared<Trefle>()));
 }
 
 void AppelRoi::demarrer() {
