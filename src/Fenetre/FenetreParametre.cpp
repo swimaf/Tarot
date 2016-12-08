@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QLabel>
-#include "../Defaut/Jeu.h";
+#include "../Defaut/Jeu.h"
 
 
 FenetreParametre::FenetreParametre(QWidget *parent) :
