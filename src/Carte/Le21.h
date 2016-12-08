@@ -10,8 +10,7 @@ class Le21 : public Atout
 {
     public:
         Le21();
-        double getValeur();
-        bool isBout();
+        bool isBout() const;
         bool operator== (const ACarte* carte) const;
 
 };

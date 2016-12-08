@@ -2,29 +2,17 @@
 #define AFORME_H
 
 #include "ACarte.h"
-#include "Tete.h"
+#include <string>
+
+using namespace std;
 
 class AForme : public ACarte
 {
-
     public:
-        AForme(Tete* tete);
-        void setTete(Tete* tete);
-        virtual string afficher() const;
-        string getURL() const;
-        double getValeur();
-        bool isBout();
-        bool isAtout();
-        bool isRoi();
-        int poids() const;
-        string getName() const;
-        virtual string getType() const = 0;
-
-
-    protected:
-        Tete* tete;
-
-
+        AForme(double valeur, string type, int poids);
+        virtual string getURL() const;
+        virtual bool operator== (const ACarte* carte) const = 0;
 };
+
 
 #endif // AFORME_H

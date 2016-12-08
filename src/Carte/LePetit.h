@@ -10,8 +10,7 @@ class LePetit: public Atout
 {
     public:
         LePetit();
-        double getValeur();
-        bool isBout();
+        bool isBout() const;
         bool operator== (const ACarte* carte) const;
 
 };

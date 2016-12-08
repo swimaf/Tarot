@@ -1,16 +1,13 @@
 #ifndef VALET_H
 #define VALET_H
 
-#include "Tete.h"
+#include "AValeur.h"
 
-
-class Valet : public Tete
+class Valet : public AValeur
 {
-    public:
-        Valet();
-        double getValeur();
-        int getPoids() const;
-        string getName() const;
+public:
+    Valet(shared_ptr<AForme> f);
+    virtual bool operator== (const ACarte* carte) const;
 };
 
-#endif // VALEURVALET_H
+#endif // VALET_H

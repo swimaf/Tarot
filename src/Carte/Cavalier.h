@@ -1,18 +1,13 @@
 #ifndef CAVALIER_H
 #define CAVALIER_H
 
+#include "AValeur.h"
 
-#include "Tete.h"
-
-class Cavalier : public Tete
+class Cavalier : public AValeur
 {
-    public:
-        Cavalier();
-        double getValeur();
-
-        int getPoids() const;
-        string getName() const;
-
+public:
+    Cavalier(shared_ptr<AForme> f);
+    virtual bool operator== (const ACarte* carte) const;
 };
 
-#endif
+#endif // CAVALIER_H

@@ -1,19 +1,12 @@
 #include "Dame.h"
 
-Dame::Dame()
+Dame::Dame(shared_ptr<AForme> f) : AValeur(3.5, 13, f)
 {
-
+    name = "Dame";
 }
 
-double Dame::getValeur() {
-    return 3.5;
-}
-
-
-int Dame::getPoids() const {
-    return 13;
-}
-
-string Dame::getName() const {
-    return "Dame";
+bool Dame::operator== (const ACarte* carte) const {
+    const Dame *o = dynamic_cast<const Dame*>(carte);
+    if(o == NULL) return false;
+    return getURL().compare(o->getURL()) == 0;
 }

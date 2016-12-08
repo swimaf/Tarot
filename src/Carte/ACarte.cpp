@@ -1,29 +1,42 @@
 #include "ACarte.h"
-#include "Coeur.h"
-#include "Valet.h"
-#include "Cavalier.h"
-#include "Dame.h"
-#include "Roi.h"
-#include "Excuse.h"
 
 using namespace std;
 
-ACarte::ACarte()
+ACarte::ACarte(double valeur, int poids, string type, string name) : valeur(valeur), type(type), poids (poids), name(name)
 {
+
 }
 
-
-string ACarte::afficher() const {
-    return getName();
+string ACarte::getName() const {
+    return name;
 }
 
+double ACarte::getValeur() const{
+    return valeur;
+}
 
-bool ACarte::isRoi() {
+string ACarte::getType() const{
+    return type;
+}
+
+int ACarte::getPoids() const {
+    return poids;
+}
+
+bool ACarte::isRoi() const{
+    return false;
+}
+
+bool ACarte::isBout() const{
+    return false;
+}
+
+bool ACarte::isAtout() const{
     return false;
 }
 
 bool ACarte::equals(shared_ptr<ACarte> a) {
-    return afficher().compare(a->afficher()) == 0;
+    return getURL().compare(a->getURL()) == 0;
 }
 
 int ACarte::compterNbBout(QVector<shared_ptr<ACarte>> cartes){
@@ -83,7 +96,7 @@ QVector<shared_ptr<ACarte>> ACarte::filtre(string type, QVector<shared_ptr<ACart
 QVector<shared_ptr<ACarte>> ACarte::filtreByValue(double val, QVector<shared_ptr<ACarte>> base) {
     QVector<shared_ptr<ACarte>> cartes;
     for(shared_ptr<ACarte> carte : base) {
-        if(carte->poids() > val) {
+        if(carte->getPoids() > val) {
             cartes.push_back(carte);
         }
     }

@@ -1,16 +1,14 @@
 #ifndef DAME_H
 #define DAME_H
 
+#include "AValeur.h"
 
-#include "Tete.h"
-
-class Dame : public Tete
+class Dame : public AValeur
 {
-    public:
-        Dame();
-        double getValeur();
-        int getPoids() const;
-        string getName() const;
+public:
+    Dame(shared_ptr<AForme> f);
+    virtual bool operator== (const ACarte* carte) const;
 };
 
-#endif // VALEURDAME_H
+
+#endif // DAME_H

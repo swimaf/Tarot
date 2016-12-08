@@ -1,23 +1,16 @@
 #include "Roi.h"
 
-Roi::Roi()
+Roi::Roi(shared_ptr<AForme> f) : AValeur(4.5, 14, f)
 {
-
+    name = "Roi";
 }
 
-double Roi::getValeur() {
-    return 4.5;
+bool Roi::operator== (const ACarte* carte) const {
+    const Roi *o = dynamic_cast<const Roi*>(carte);
+    if(o == NULL) return false;
+    return getURL().compare(o->getURL()) == 0;
 }
 
-bool Roi::isRoi() {
+bool Roi::isRoi() const{
     return true;
-}
-
-
-int Roi::getPoids() const {
-    return 14;
-}
-
-string Roi::getName() const {
-    return "Roi";
 }

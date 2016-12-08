@@ -10,22 +10,11 @@ using namespace std;
 class Atout : public ACarte
 {
     public:
-        Atout(int);
-        string afficher() const;
-        double getValeur();
-        string getURL() const;
-
-        bool isBout();
-        bool isAtout();
-        bool operator== (const ACarte* carte) const ;
-        string getName() const;
-        int poids() const;
-        string getType() const;
-
-
-    protected :
-        int val;
-
+    Atout(int poids);
+    virtual int getPoids() const;
+    virtual bool isAtout() const;
+    virtual bool operator== (const ACarte* carte) const;
+    virtual string getURL() const;
 
 };
 

@@ -9,14 +9,9 @@ class Excuse : public ACarte
 {
     public:
         Excuse();
-        double getValeur();
-        bool isBout();
-        bool isAtout();
-        bool operator== (const ACarte* carte) const;
-        string getName() const;
-        int poids() const;
-        string getType() const;
-        string getURL() const;
+        virtual bool isBout() const;
+        virtual bool operator== (const ACarte* carte) const;
+        virtual string getURL() const;
 
 };
 

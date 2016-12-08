@@ -1,16 +1,15 @@
 #ifndef ROI_H
 #define ROI_H
 
-#include "Tete.h"
+#include "AValeur.h"
 
-class Roi : public Tete
+class Roi : public AValeur
 {
-    public:
-        Roi();
-        double getValeur();
-        bool isRoi();
-        int getPoids() const;
-        string getName() const;
+public:
+    Roi(shared_ptr<AForme> f);
+    virtual bool operator== (const ACarte* carte) const;
+    virtual bool isRoi() const;
+
 };
 
-#endif // VALEURROI_H
+#endif // ROI_H

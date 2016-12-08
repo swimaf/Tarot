@@ -5,14 +5,11 @@
 
 using namespace std;
 
-class Carreau : public AForme
+class Carreau  : public AForme
 {
-    public:
-        Carreau(Tete *valeur);
-        string afficher() const;
-        bool operator== (const ACarte* carte) const;
-        string getType() const;
-
+public:
+    Carreau();
+    virtual bool operator== (const ACarte* carte) const;
 
 };
 

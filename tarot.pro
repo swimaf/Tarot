@@ -12,21 +12,11 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += src/main.cpp \
-    src/Carte/ACarte.cpp \
-    src/Carte/AForme.cpp \
     src/Carte/Atout.cpp \
     src/Carte/Carreau.cpp \
-    src/Carte/Cavalier.cpp \
-    src/Carte/Coeur.cpp \
-    src/Carte/Dame.cpp \
     src/Carte/Excuse.cpp \
     src/Carte/Le21.cpp \
     src/Carte/LePetit.cpp \
-    src/Carte/Pique.cpp \
-    src/Carte/Roi.cpp \
-    src/Carte/Simple.cpp \
-    src/Carte/Tete.cpp \
-    src/Carte/Trefle.cpp \
     src/Defaut/AppelRoi.cpp \
     src/Defaut/Chien.cpp \
     src/Defaut/Classement.cpp \
@@ -48,29 +38,28 @@ SOURCES += src/main.cpp \
     src/Defaut/Passer.cpp \
     src/Defaut/Pli.cpp \
     src/Defaut/Prise.cpp \
-    src/Carte/Valet.cpp \
     src/Fenetre/FenetreJeux.cpp \
     src/Defaut/Jeu.cpp \
     src/Fenetre/FenetreClassement.cpp \
     src/Defaut/StrategieJeu.cpp \
-    src/Fenetre/FenetreParametre.cpp
+    src/Fenetre/FenetreParametre.cpp \
+    src/Carte/ACarte.cpp \
+    src/Carte/AForme.cpp \
+    src/Carte/AValeur.cpp \
+    src/Carte/Cavalier.cpp \
+    src/Carte/Coeur.cpp \
+    src/Carte/Dame.cpp \
+    src/Carte/Pique.cpp \
+    src/Carte/Roi.cpp \
+    src/Carte/Simple.cpp \
+    src/Carte/Trefle.cpp \
+    src/Carte/Valet.cpp
 
 HEADERS += \
-    src/Carte/ACarte.h \
-    src/Carte/AForme.h \
     src/Carte/Atout.h \
-    src/Carte/Carreau.h \
-    src/Carte/Cavalier.h \
-    src/Carte/Coeur.h \
-    src/Carte/Dame.h \
     src/Carte/Excuse.h \
     src/Carte/Le21.h \
     src/Carte/LePetit.h \
-    src/Carte/Pique.h \
-    src/Carte/Roi.h \
-    src/Carte/Simple.h \
-    src/Carte/Tete.h \
-    src/Carte/Trefle.h \
     src/Defaut/AppelRoi.h \
     src/Defaut/Chien.h \
     src/Defaut/Classement.h \
@@ -93,10 +82,21 @@ HEADERS += \
     src/Defaut/Petite.h \
     src/Defaut/Pli.h \
     src/Defaut/Prise.h \
-    src/Carte/Valet.h \
     src/Fenetre/FenetreJeux.h \
     src/Defaut/Jeu.h \
     src/Fenetre/FenetreClassement.h \
     src/Defaut/StrategieJeu.h \
-    src/Fenetre/FenetreParametre.h
+    src/Fenetre/FenetreParametre.h \
+    src/Carte/ACarte.h \
+    src/Carte/AForme.h \
+    src/Carte/AValeur.h \
+    src/Carte/Carreau.h \
+    src/Carte/Cavalier.h \
+    src/Carte/Coeur.h \
+    src/Carte/Dame.h \
+    src/Carte/Pique.h \
+    src/Carte/Roi.h \
+    src/Carte/Simple.h \
+    src/Carte/Trefle.h \
+    src/Carte/Valet.h
 

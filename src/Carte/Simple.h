@@ -1,18 +1,15 @@
 #ifndef SIMPLE_H
 #define SIMPLE_H
 
-#include "Tete.h"
+#include "AValeur.h"
 
-class Simple : public Tete
+class Simple : public AValeur
 {
     public:
-        Simple(int val);
-        double getValeur();
-        int getPoids() const;
-        string getName() const;
+        Simple(int poids, shared_ptr<AForme> f);
+        virtual bool operator== (const ACarte* carte) const;
+        virtual string getName() const;
 
-    private:
-        int val;
 };
 
-#endif // VALEURSIMPLE_H
+#endif // SIMPLE_H

@@ -10,18 +10,17 @@ using namespace std;
 class ACarte
 {
     public:
-        ACarte();
-        virtual double getValeur() = 0;
-        virtual string afficher() const;
-        virtual string getName() const = 0;
-        virtual bool isBout() = 0;
-        virtual bool isAtout() = 0;
+        ACarte(double valeur, int poids, string type, string name);
         virtual string getURL() const = 0;
-        virtual bool isRoi();
-        virtual string getType() const = 0;
-        virtual int poids() const = 0;
-        bool equals(shared_ptr<ACarte> a);
         virtual bool operator== (const ACarte* carte) const = 0;
+        virtual string getName() const;
+        virtual double getValeur() const;
+        virtual string getType() const;
+        virtual int getPoids() const;
+        virtual bool isBout() const;
+        virtual bool isAtout() const;
+        virtual bool isRoi() const;
+        bool equals(shared_ptr<ACarte> a);
 
         static int compterNbBout(QVector<shared_ptr<ACarte>> cartes);
         static int compterNbAtout(QVector<shared_ptr<ACarte>> cartes);
@@ -30,6 +29,12 @@ class ACarte
         static void eraseElements(QVector<shared_ptr<ACarte>> *cartes, QVector<int> index);
         static QVector<shared_ptr<ACarte>> filtre(string, QVector<shared_ptr<ACarte>>);
         static QVector<shared_ptr<ACarte>> filtreByValue(double, QVector<shared_ptr<ACarte>>);
+
+    protected:
+        double valeur;
+        int poids;
+        string type;
+        string name;
 };
 
 #endif // CARTE_H

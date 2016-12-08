@@ -1,19 +1,12 @@
 #include "Valet.h"
 
-Valet::Valet()
+Valet::Valet(shared_ptr<AForme> f) : AValeur(1.5, 11, f)
 {
-
+    name = "Valet";
 }
 
-double Valet::getValeur() {
-    return 1.5;
-}
-
-
-int Valet::getPoids() const {
-    return 11;
-}
-
-string Valet::getName() const {
-    return "Valet";
+bool Valet::operator== (const ACarte* carte) const {
+    const Valet *o = dynamic_cast<const Valet*>(carte);
+    if(o == NULL) return false;
+    return getURL().compare(o->getURL()) == 0;
 }

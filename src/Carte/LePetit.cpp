@@ -2,14 +2,10 @@
 
 LePetit::LePetit() : Atout(1)
 {
-
+    valeur = 4.5;
 }
 
-double LePetit::getValeur() {
-    return 4.5;
-}
-
-bool LePetit::isBout(){
+bool LePetit::isBout() const{
     return true;
 }
 
@@ -17,5 +13,5 @@ bool LePetit::isBout(){
 bool LePetit::operator== (const ACarte* carte) const {
     const LePetit *o = dynamic_cast<const LePetit*>(carte);
     if(o == NULL) return false;
-    return afficher().compare(o->afficher()) == 0;
+    return getURL().compare(o->getURL()) == 0;
 }

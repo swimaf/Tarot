@@ -1,24 +1,11 @@
 #include "Pique.h"
 
-
-Pique::Pique(Tete* valeur) : AForme(valeur)
+Pique::Pique(): AForme(0, "Pique", 0)
 {
-
 }
-string Pique::afficher() const{
-    return ACarte::afficher()+" de "+getType();
-}
-
-
 
 bool Pique::operator== (const ACarte* carte) const {
     const Pique *o = dynamic_cast<const Pique*>(carte);
     if(o == NULL) return false;
-    return afficher().compare(o->afficher()) == 0;
+    return getURL().compare(o->getURL()) == 0;
 }
-
-
-string Pique::getType() const {
-    return "Pique";
-}
-

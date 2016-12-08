@@ -1,41 +1,20 @@
 #include "Excuse.h"
 
-Excuse::Excuse() : ACarte()
+Excuse::Excuse() : ACarte(4.5,0,"Excuse","Excuse")
 {
 }
 
-
-double Excuse::getValeur() {
-    return 4.5;
-}
-
-string Excuse::getName() const {
-    return "Excuse";
-}
-
-int Excuse::poids() const {
-    return 0;
-}
-
-bool Excuse::isBout(){
+bool Excuse::isBout() const{
     return true;
-}
-
-bool Excuse::isAtout(){
-    return false;
 }
 
 bool Excuse::operator== (const ACarte* carte) const {
     const Excuse *o = dynamic_cast<const Excuse*>(carte);
     if(o == NULL) return false;
-    return afficher().compare(o->afficher()) == 0;
+    return getURL().compare(o->getURL()) == 0;
 }
 
-
-string Excuse::getType() const{
-    return "Excuse";
-}
 string Excuse::getURL() const {
-    return "0";
+    return name;
 }
 

@@ -23,7 +23,7 @@ shared_ptr<Paquet> Paquet::instance=make_shared<Paquet>();
 Paquet::Paquet()
 {
     for(int i=1; i<11; i++) {
-        cartes.push_back(make_shared<Coeur>(new Simple(i)));
+        cartes.push_back(make_shared<Simple>(i, make_shared<Coeur>());
         cartes.push_back(make_shared<Pique>(new Simple(i)));
         cartes.push_back(make_shared<Trefle>(new Simple(i)));
         cartes.push_back(make_shared<Carreau>(new Simple(i)));
